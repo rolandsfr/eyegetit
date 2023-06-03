@@ -8,6 +8,7 @@ require('dotenv').config();
 
 const indexRouter = require('./routes/index');
 const inputRouter = require('./routes/input');
+const cardsRouter = require('./routes/cards');
 
 
 
@@ -27,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/input', inputRouter)
+app.use('/cards', cardsRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

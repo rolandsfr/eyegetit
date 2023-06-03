@@ -37,6 +37,8 @@ All responses should be in JSON in the following format:
                 'Authorization': `Bearer ${API_KEY}`, 'Content-Type': 'application/json',
             },
         });
+
+        // TODO: Add reply validation
         const {choices} = response.data;
         const reply = choices[0].message.content;
         return JSON.parse(reply);
