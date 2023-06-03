@@ -1,25 +1,17 @@
-class Cards {
-    constructor({ cardsRepository }) {
-        this.cardsRepository = cardsRepository;
-    }
+const db = require('./db')
 
-    async getAll() {
-        return this.cardsRepository.getAll();
-    }
+function getAll()
+{
+    const query = 'select * from images'
+    return db.getConnection().then((conn) => {
+        const res = conn.query(query)
+        console.log(res)
+        return res
+    }).catch((err) => {
+        console.error(err)
+    })
+}
 
-    async getOne(id) {
-        return this.cardsRepository.getOne(id);
-    }
-
-    async createOne(card) {
-        return this.cardsRepository.createOne(card);
-    }
-
-    async updateOne(id, card) {
-        return this.cardsRepository.updateOne(id, card);
-    }
-
-    async deleteOne(id) {
-        return this.cardsRepository.deleteOne(id);
-    }
+module.exports = {
+    getAll,
 }
