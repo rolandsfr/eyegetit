@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { PrepareImageUrl } = require('../helper/image_url');
+const { PrepareImageUrl, ValidateImageUrl} = require('../helper/image_url');
 
 const { sendMessage } = require('../services/chatgpt');
 
@@ -15,9 +15,21 @@ router.put('/', async (req, res) => {
     const data = await sendMessage(input_text)
 
 
+
     data.forEach((item) => {
         item.image = PrepareImageUrl(item.card)
     })
+
+    const validated = []
+
+    data.forEach((item) => {
+        validated.push(ValidateImageUrl(item.image).then((url) => {
+            item.image = url
+        }))
+    })
+
+    await Promise.all(validated)
+
     res.json({
         status: 'ok',
         prompt: input_text,

@@ -1,6 +1,26 @@
+const axios = require('axios')
+
 function PrepareImageUrl(keyword) {
     const name = prepareImageName(keyword)
-    return `${process.env.IMAGE_BASE_URL}/${name}/${name}.jpg`
+    return`${process.env.IMAGE_BASE_URL}/${name}/${name}.jpg`
+}
+
+function ValidateImageUrl(url) {
+    return axios.head(url)
+        .then((response) => {
+            if (response.status === 200) {
+                return url
+            }
+            return ''
+        })
+        .catch((error) => {
+            if (error.response.status === 404) {
+                console.log('image not found:', url)
+            } else {
+                console.error(error)
+            }
+            return ''
+        })
 }
 
 function prepareImageName(keyword) {
@@ -8,5 +28,6 @@ function prepareImageName(keyword) {
 }
 
 module.exports = {
-    PrepareImageUrl
+    PrepareImageUrl,
+    ValidateImageUrl
 }

@@ -38,7 +38,7 @@ async function sendMessage(message) {
         const {choices} = response.data;
         const reply = choices[0].message.content;
         return JSON.parse(reply);
-    } catch (error) {x
+    } catch (error) {
         console.error('Error:', error.response.data)
         throw error;
     }
