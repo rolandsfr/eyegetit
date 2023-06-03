@@ -9,19 +9,13 @@ router.put('/', async (req, res) => {
     if (!input_text) {
         return res.json({status: 'error', message: 'input_text is required'})
     }
-
     console.log('input_text:', input_text);
-    // TODO: Add validation
     const data = await sendMessage(input_text)
-
-
-
     data.forEach((item) => {
         item.image = PrepareImageUrl(item.card)
     })
 
     const validated = []
-
     data.forEach((item) => {
         validated.push(ValidateImageUrl(item.image).then((url) => {
             item.image = url
