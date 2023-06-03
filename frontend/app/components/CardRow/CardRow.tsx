@@ -14,43 +14,41 @@ const Wrapper = styled.div`
 
 const CardRow: React.FC = () => {
   const { cards } = useAppSelector((state) => state.cards);
-  const [cardComponents, setCardsComponents] = useState<any>([]);
+  const [cardComponents, setCardsComponents] = useState<any>([{}, {}, {}, {}]);
 
-  let intialStates = [
-    {
-      name: null,
-      url: null,
-    },
-    {
-      name: null,
-      url: null,
-    },
-    {
-      name: null,
-      url: null,
-    },
-    {
-      name: null,
-      url: null,
-    },
-  ];
+  let initialState = {
+    name: null,
+    url: null,
+  };
 
   useEffect(() => {
-    // add first initial 4 cards
-    // FIXME: WONT ADD ALL 4
-    for (let i = 0; i < 4; i++) {
-      setCardsComponents([
-        ...cardComponents,
-        <ImageContainer {...intialStates[i]} key={i} />,
-      ]);
+    const rowsToAppend =
+      cardComponents.length < cards.length
+        ? Math.ceil(cards.length / 4) - 1
+        : 0;
+
+    if (rowsToAppend > 0) {
+      const emptyObjects = [];
+      for (let i = 0; i < rowsToAppend * 4; i++) {
+        emptyObjects.push({});
+      }
+      setCardsComponents([...cardComponents, ...emptyObjects]);
     }
-  }, []);
+  }, [cards]);
 
-  useEffect(() => {
-    console.log(cardComponents);
-  }, [cardComponents]);
-
-  return <Wrapper>{cardComponents}</Wrapper>;
+  return (
+    <Wrapper>
+      {cardComponents.map((card: any, index: any) => {
+        return (
+          <ImageContainer
+            key={index}
+            name={cards[index]?.word}
+            url={cards[index]?.image}
+          />
+        );
+      })}
+    </Wrapper>
+  );
 };
 
 export default CardRow;

@@ -126,3 +126,8 @@ table {
 html {
   font-size: 10px;
 }
+
+p,
+span {
+  font-size: 1.6rem;
+}

@@ -44,7 +44,6 @@ const Listening = () => {
       <Container>
         <CardRow />
         <Input />
-
         <ControlPanel />
       </Container>
     </StyledWrapper>

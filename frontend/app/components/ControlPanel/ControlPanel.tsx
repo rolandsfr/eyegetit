@@ -31,7 +31,7 @@ const fetchPictures = async (setState: Dispatch<SetStateAction<any>>) => {
     ];
   }>("http://192.168.8.217:3001/input", {
     input_text:
-      "Would you like to go there by red car or yellow bus or random taxi?",
+      "Would you like to go there by red car or yellow bus or random taxi",
   });
 
   // array is in res.data.data
