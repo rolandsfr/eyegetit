@@ -30,15 +30,13 @@ All responses should be in JSON in the following format:
             }, {
                 role: "assistant",
                 content: "I'm happy to help! Please provide me with the sentence you'd like me to convert to an array of PECS cards."
-            }, {role: "user", content: message},
+            }, {role: "user", content: `${message}. Respond only in plain JSON.`}
             ]
         }, {
             headers: {
                 'Authorization': `Bearer ${API_KEY}`, 'Content-Type': 'application/json',
             },
         });
-
-        // TODO: Add reply validation
         const {choices} = response.data;
         const reply = choices[0].message.content;
         return JSON.parse(reply);
