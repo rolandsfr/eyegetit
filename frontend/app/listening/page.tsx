@@ -38,10 +38,6 @@ const StyledWrapper = styled.main`
 const Listening = () => {
   const { cards } = useAppSelector((state) => state.cards);
 
-  useEffect(() => {
-    console.log(cards);
-  }, [cards]);
-
   return (
     <StyledWrapper>
       <Header />

@@ -6,6 +6,7 @@ const StyledButton = styled.button`
   background: #e1e1e1;
   border-radius: 10px;
   width: 100%;
+  cursor: pointer;
 `;
 
 const withButton = (WrappedComponent: any) => {

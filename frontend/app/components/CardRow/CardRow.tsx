@@ -12,46 +12,45 @@ const Wrapper = styled.div`
   padding-top: 5.5em;
 `;
 
-let it = 0;
-
 const CardRow: React.FC = () => {
   const { cards } = useAppSelector((state) => state.cards);
-  const [state, setState] = useState(null);
+  const [cardComponents, setCardsComponents] = useState<any>([]);
 
-  const placeholderCards: any = [];
+  let intialStates = [
+    {
+      name: null,
+      url: null,
+    },
+    {
+      name: null,
+      url: null,
+    },
+    {
+      name: null,
+      url: null,
+    },
+    {
+      name: null,
+      url: null,
+    },
+  ];
 
   useEffect(() => {
-    for (let i = it; i < it + 4; i++) {
-      let word = null;
-      let image = null;
-
-      if (cards[i]) {
-        word = cards[i].word;
-        image = cards[i].image;
-
-        console.log(word);
-      }
-      placeholderCards.push(<ImageContainer key={i} url={image} name={word} />);
-      it = i;
+    // add first initial 4 cards
+    // FIXME: WONT ADD ALL 4
+    for (let i = 0; i < 4; i++) {
+      setCardsComponents([
+        ...cardComponents,
+        <ImageContainer {...intialStates[i]} key={i} />,
+      ]);
     }
-    setState(null);
-  }, [cards]);
+  }, []);
 
-  for (let i = 0; i < 4; i++) {
-    let word = null;
-    let image = null;
+  useEffect(() => {
+    console.log(cardComponents);
+  }, [cardComponents]);
 
-    if (cards[i]) {
-      word = cards[i].word;
-      image = cards[i].image;
-
-      console.log(word);
-    }
-    placeholderCards.push(<ImageContainer key={i} url={image} name={word} />);
-    it = i;
-  }
-
-  return <Wrapper>{placeholderCards}</Wrapper>;
+  return <Wrapper>{cardComponents}</Wrapper>;
 };
 
 export default CardRow;
