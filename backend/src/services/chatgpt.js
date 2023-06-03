@@ -11,7 +11,8 @@ async function sendMessage(message) {
             max_tokens: 100, // Adjust the max tokens based on your desired response length
             temperature: 0.6, // Adjust the temperature to control the randomness of the response
             n: 1, // Number of responses to generate
-            model: "gpt-3.5-turbo", messages: [{
+            model: "gpt-3.5-turbo",
+            messages: [{
                 role: "system", content: "You are a helpful assistant."
             }, {
                 role: "user", content: `All my subsequent messages will be sentences that I'd like you to convert to an array of PECS cards. Please use a single word to represent each card. Only take meaningful words. Please make any extra qualifiers for each meaningful word as an extra property called qualifiers. Examples:
@@ -37,7 +38,7 @@ async function sendMessage(message) {
         const {choices} = response.data;
         const reply = choices[0].message.content;
         return JSON.parse(reply);
-    } catch (error) {
+    } catch (error) {x
         console.error('Error:', error.response.data)
         throw error;
     }
