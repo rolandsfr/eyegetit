@@ -58,6 +58,8 @@ const Input: React.FC<InputProps> = ({ definedValue, onValueChanged }) => {
     }
   };
 
+  const valueToSubmit = value || definedValue;
+
   return (
     <Wrapper>
       <Textarea
@@ -73,7 +75,7 @@ const Input: React.FC<InputProps> = ({ definedValue, onValueChanged }) => {
       ></Textarea>
       <button
         className="submit"
-        onClick={value ? () => dispatch(setQuery(value)) : () => {}}
+        onClick={valueToSubmit ? () => dispatch(setQuery(valueToSubmit)) : () => {}}
       >
         Submit
       </button>

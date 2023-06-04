@@ -16,6 +16,8 @@ import { useAppSelector } from "../hooks/useAppSelector";
 
 import CardRow from "../components/CardRow/CardRow";
 import { useModal } from "../components/Modal/Modal";
+import { useAppDispatch } from "../hooks/useAppDispatch";
+import { setCards } from "../redux/slices/cardsSlice";
 
 const StyledWrapper = styled.main`
   width: 100%;
@@ -61,6 +63,8 @@ const Listening = () => {
   const { cards } = useAppSelector((state) => state.cards);
   const { Modal, openModal, closeModal } = useModal();
 
+  // const dispatch = useAppDispatch();
+
   return (
     <StyledWrapper>
       <Container>
@@ -74,9 +78,11 @@ const Listening = () => {
         />
         <ControlPanel
           onTranscriptChange={(value) => setTranscript(value)}
-          resolveTextToPlay={() => inputText}
+          resolveTextToPlay={() => inputText || transcript || ""}
           onClear={() => {
             setInputText("");
+            setTranscript("");
+            // dispatch(setCards([]));
           }}
         />
       </Container>
