@@ -2,8 +2,6 @@ import React, { useEffect, useState, useCallback } from 'react';
 
 interface ModalProps {
   children: React.ReactNode;
-  onClose: () => void;
-  close: () => void;
 }
 
 type OpenListener = (open: boolean) => void;
@@ -19,9 +17,7 @@ export const useModal = () => {
     listeners.forEach((listener) => listener(true));
   };
 
-  const Modal: React.FC<ModalProps> = ({ children, onClose }) => {
-
-
+  const Modal: React.FC<ModalProps> = ({ children }) => {
     const [open, setOpen] = useState(true);
 
     const handleKeyDown = (event: KeyboardEvent) => {
