@@ -35,8 +35,9 @@ const ControlPanel: React.FC<ControlPanelProps> = ({ onTranscriptChange, omitRec
     resetTranscript,
   } = useSpeechRecognition();
 
-  const fetchPictures = async () => {
+  const toggleRecording = async () => {
     setRecordingState(!recordingState);
+
     if (!recordingState) {
       SpeechRecognition.startListening({
         continuous: true,
@@ -44,6 +45,7 @@ const ControlPanel: React.FC<ControlPanelProps> = ({ onTranscriptChange, omitRec
         // interimResults: false,
       });
     } else {
+      resetTranscript();
       SpeechRecognition.abortListening();
     }
 
@@ -79,7 +81,7 @@ const ControlPanel: React.FC<ControlPanelProps> = ({ onTranscriptChange, omitRec
     <Wrapper className="panel">
       {omitRecord || (
         <Button
-          onClick={fetchPictures}
+          onClick={toggleRecording}
           style={
             recordingState
               ? {
@@ -92,7 +94,7 @@ const ControlPanel: React.FC<ControlPanelProps> = ({ onTranscriptChange, omitRec
         </Button>
       )}
       <Button>Play</Button>
-      <Button>Clear</Button>
+      <Button onClick={() => resetTranscript()}>Clear</Button>
     </Wrapper>
   );
 };
