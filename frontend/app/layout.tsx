@@ -6,6 +6,8 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import store from "./redux/store";
 import { Provider } from "react-redux";
+import { useEffect } from "react";
+import { useRouter, usePathname } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +25,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (pathname === "/") {
+      router.push("/listening");
+    }
+  }, [pathname]);
   return (
     <html lang="en">
       <body className={inter.className}>
