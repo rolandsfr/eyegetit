@@ -59,7 +59,7 @@ const CardRow: React.FC<CardRowProps> = ({
     });
 
     for (let i = 0; i < placeholdersToAppend; i++) {
-      newCardComponents.push(InitialPlaceholder);
+      newCardComponents[i + cards.length] = InitialPlaceholder;
     }
 
     setCardsComponents(newCardComponents);
