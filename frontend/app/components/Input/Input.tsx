@@ -10,11 +10,12 @@ const Textarea = styled.textarea`
 `;
 
 interface InputProps {
-  value: string;
+  definedValue?: string;
+  onValueChanged?: (value: string) => void;
 }
 
-const Input: React.FC<InputProps> = ({value}) => {
-  return <Textarea defaultValue={value} />;
+const Input: React.FC<InputProps> = ({ definedValue, onValueChanged }) => {
+  return <Textarea onChange={(e) => onValueChanged && definedValue != e.target.value ? onValueChanged(e.target.value) : {}} defaultValue={definedValue} />;
 };
 
 export default Input;

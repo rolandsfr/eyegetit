@@ -25,11 +25,18 @@ const Wrapper = styled.div`
 
 interface ControlPanelProps {
   onTranscriptChange?: (transcript: string) => void;
+  resolveTextToPlay?: () => string;
+  onClear?: () => void;
   omitRecord?: boolean;
 }
 
-const ControlPanel: React.FC<ControlPanelProps> = ({ onTranscriptChange, omitRecord }) => {
+const ControlPanel: React.FC<ControlPanelProps> = ({ onTranscriptChange, resolveTextToPlay, onClear, omitRecord }) => {
   const [recordingState, setRecordingState] = useState(false);
+  const [playingText, setPlayingText] = useState("");
+
+  const voices = window.speechSynthesis.getVoices();
+  const selectedVoice = voices.find((voice) => voice.name == 'Google US English') || voices[0];
+
   const {
     transcript,
     resetTranscript,
@@ -45,8 +52,8 @@ const ControlPanel: React.FC<ControlPanelProps> = ({ onTranscriptChange, omitRec
         // interimResults: false,
       });
     } else {
-      resetTranscript();
       SpeechRecognition.abortListening();
+      resetTranscript();
     }
 
     // setRecordingState(!recordingState);
@@ -73,11 +80,35 @@ const ControlPanel: React.FC<ControlPanelProps> = ({ onTranscriptChange, omitRec
     // store.dispatch(setCards(cards));
   };
 
-  useEffect(() => {
-    if (onTranscriptChange) {
-      onTranscriptChange(transcript);
+  const playVoice = () => {
+    if (!resolveTextToPlay) {
+      return;
     }
+
+    setPlayingText(resolveTextToPlay());
+  };
+
+  useEffect(() => {
+    if (!onTranscriptChange || !transcript) {
+      return;
+    }
+
+    onTranscriptChange(transcript);
   }, [onTranscriptChange, transcript]);
+
+  useEffect(() => {
+    if (playingText === "") {
+      return;
+    }
+
+    let utterance = new SpeechSynthesisUtterance(playingText);
+
+    utterance.voice = selectedVoice;
+
+    window.speechSynthesis.speak(utterance);
+
+    setPlayingText("");
+  }, [selectedVoice, playingText]);
 
   return (
     <Wrapper className="panel">
@@ -95,8 +126,8 @@ const ControlPanel: React.FC<ControlPanelProps> = ({ onTranscriptChange, omitRec
           {!recordingState ? "Record" : "Stop recording"}
         </Button>
       )}
-      <Button>Play</Button>
-      <Button onClick={() => resetTranscript()}>Clear</Button>
+      <Button onClick={() => playVoice()}>Play</Button>
+      <Button onClick={() => { onClear ? onClear() : {}; resetTranscript() }}>Clear</Button>
     </Wrapper>
   );
 };
