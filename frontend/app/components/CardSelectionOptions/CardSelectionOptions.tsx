@@ -2,6 +2,8 @@ import styled from "styled-components";
 import Button from "@/app/styled/Button";
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 import { setCardSelectionMode } from "@/app/redux/slices/navSlice";
+import { CardSelectionOptions } from "@/app/types";
+import { useAppSelector } from "@/app/hooks/useAppSelector";
 
 const Wrapper = styled.div`
   display: flex;
@@ -11,20 +13,31 @@ const Wrapper = styled.div`
   margin-top: 1em;
 `;
 
-const cardSelectionOptions: React.FC = () => {
+const PanelButton: React.FC<{ option: CardSelectionOptions; name: string }> = ({
+  option,
+  name,
+}) => {
   const dispatch = useAppDispatch();
+  const { cardSelection } = useAppSelector((state) => state.navigation);
 
   return (
+    <Button
+      style={{
+        backgroundColor: cardSelection === option ? "#E1E1E1" : "#F5F5F5",
+      }}
+      onClick={() => dispatch(setCardSelectionMode(option))}
+    >
+      {name}
+    </Button>
+  );
+};
+
+const cardSelectionOptions: React.FC = () => {
+  return (
     <Wrapper>
-      <Button onClick={() => dispatch(setCardSelectionMode("recommended"))}>
-        Recommended
-      </Button>
-      <Button onClick={() => dispatch(setCardSelectionMode("categories"))}>
-        Categories
-      </Button>
-      <Button onClick={() => dispatch(setCardSelectionMode("generate"))}>
-        Add new image
-      </Button>
+      <PanelButton name="Recommended" option="recommended" />
+      <PanelButton name="Categories" option="categories" />
+      <PanelButton name="Add new image" option="generate" />
     </Wrapper>
   );
 };
