@@ -14,21 +14,23 @@ import { useAppSelector } from "../hooks/useAppSelector";
 import CardSelectionOptions from "../components/CardSelectionOptions/CardSelectionOptions";
 import CardRow from "../components/CardRow/CardRow";
 import axios from "axios";
+import SelectionUnit from "../components/SelectionUnit/SelectionUnit";
 
 const StyledWrapper = styled.main`
   width: 100%;
 
-  .images {
+  .cards {
+    width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     justify-content: center;
     gap: 2em;
-    align-items: center;
-    padding-top: 5.5em;
-  }
+    align-items: stretch;
+    padding-top: 1.5em;
 
-  textarea {
-    margin-top: 1em;
+    & > div {
+      width: 100%;
+    }
   }
 
   .panel {
@@ -51,7 +53,8 @@ const Speaking = () => {
         const res = await axios.get<{ words: CardInterface[] }>(
           "http://192.168.8.217:3001/cards/list"
         );
-        setWords(res.data.words.slice(0, 30));
+        const words = res.data.words.slice(0, 30);
+        setWords(words);
       })();
     }
   }, [cardSelection]);
@@ -68,18 +71,17 @@ const Speaking = () => {
           <></>
         ) : (
           // recommended cards
-          words.map((word) => {
-            return (
-              <div className="card">
-                <div
-                  className="image"
-                  style={{
-                    backgroundImage: word.url,
-                  }}
-                ></div>
-              </div>
-            );
-          })
+          <div className="cards">
+            {words.map((props, index) => {
+              return (
+                <SelectionUnit
+                  name={props.word}
+                  url={props.url.replace(/\s/g, "%20")}
+                  key={index}
+                />
+              );
+            })}
+          </div>
         )}
       </Container>
     </StyledWrapper>

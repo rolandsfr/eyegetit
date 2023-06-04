@@ -41,7 +41,8 @@ const ImageWrapper = styled.div<{ state: string | null | undefined }>`
   border-radius: 10px;
   aspect-ratio: 1 / 1;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100%;
+  background-position: ceter;
 `;
 
 const WordContainer = styled.div<{ word: string | null | undefined }>`

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback } from "react";
 
 interface ModalProps {
   children: React.ReactNode;
@@ -20,7 +20,7 @@ export const useModal = () => {
   };
 
   const Modal: React.FC<ModalProps> = ({ children, onClose }) => {
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
 
     const closeMe = () => {
       setOpen(false);
@@ -28,7 +28,7 @@ export const useModal = () => {
     };
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
+      if (event.key === "Escape") {
         closeMe();
       }
     };
@@ -37,23 +37,23 @@ export const useModal = () => {
       openListeners.push(() => setOpen(true));
       closeListeners.push(() => closeMe());
 
-      document.addEventListener('keydown', handleKeyDown);
+      document.addEventListener("keydown", handleKeyDown);
 
       return () => {
-        document.removeEventListener('keydown', handleKeyDown);
+        document.removeEventListener("keydown", handleKeyDown);
       };
     }, []);
 
     return (
-      <div className="modal" style={{ display: !open ? 'none' : 'block'}}>
+      <div className="modal" style={{ display: !open ? "none" : "block" }}>
         <div className="modal-content">
-        <button className="close-button" onClick={() => closeMe()}>
+          <button className="close-button" onClick={() => closeMe()}>
             X
-        </button>
-        {children}
+          </button>
+          {children}
         </div>
       </div>
-      );
+    );
   };
 
   return {
@@ -61,4 +61,4 @@ export const useModal = () => {
     closeModal,
     openModal,
   };
-}
+};
