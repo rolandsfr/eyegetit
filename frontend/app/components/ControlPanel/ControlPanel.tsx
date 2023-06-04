@@ -84,28 +84,30 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
   };
 
   useEffect(() => {
-    (async () => {
-      const res = await axios.put<{
-        data: [
-          {
-            card: string;
-            image: string;
-          }
-        ];
-      }>("http://192.168.8.217:3001/input", {
-        input_text: query,
-      });
+    if (query) {
+      (async () => {
+        const res = await axios.put<{
+          data: [
+            {
+              card: string;
+              image: string;
+            }
+          ];
+        }>("http://192.168.8.217:3001/input", {
+          input_text: query,
+        });
 
-      // array is in res.data.data
-      const cards = res.data.data.map((card) => {
-        return {
-          image: card.image,
-          word: card.card,
-        };
-      });
+        // array is in res.data.data
+        const cards = res.data.data.map((card) => {
+          return {
+            image: card.image,
+            word: card.card,
+          };
+        });
 
-      store.dispatch(setCards(cards));
-    })();
+        store.dispatch(setCards(cards));
+      })();
+    }
   }, [query]);
 
   const playVoice = () => {

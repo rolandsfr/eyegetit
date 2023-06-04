@@ -62,13 +62,17 @@ interface ImageContainerProps extends CardInterface {
   onClick?: (card: CardInterface) => void;
 }
 
-const ImageContainer: React.FC<ImageContainerProps> = ({ url, word, onClick }) => {
+const ImageContainer: React.FC<ImageContainerProps> = ({
+  url,
+  word,
+  onClick,
+}) => {
   const container = useRef<HTMLDivElement>(null);
 
   return (
     <Wrapper>
       <ImageWrapper
-        onClick={() => onClick ? onClick({ url, word }) : {}}
+        onClick={() => (onClick ? onClick({ url, word }) : {})}
         ref={container}
         state={url}
         style={{
@@ -76,7 +80,7 @@ const ImageContainer: React.FC<ImageContainerProps> = ({ url, word, onClick }) =
           backgroundImage: `url(${url})`,
         }}
       >
-        {!url ? (
+        {url === "" ? (
           <div className="no-pic">
             <h3>Image is missing</h3>
             <p>Press to create an image</p>
