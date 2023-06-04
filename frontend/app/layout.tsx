@@ -6,9 +6,6 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import store from "./redux/store";
 import { Provider } from "react-redux";
-import { useAppSelector } from "./hooks/useAppSelector";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
 
 const inter = Inter({ subsets: ["latin"] });
 

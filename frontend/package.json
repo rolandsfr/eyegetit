@@ -36,5 +36,8 @@
   "devDependencies": {
     "@types/core-js": "^2.5.5",
     "@types/react-speech-recognition": "^3.9.2"
+  },
+  "resolutions": {
+    "**/next": "13.4.4"
   }
 }

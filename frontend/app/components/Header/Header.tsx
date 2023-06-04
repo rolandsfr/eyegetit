@@ -38,25 +38,18 @@ const Header: React.FC = () => {
   const router = useRouter();
 
   const handleSwitchChange = () => {
-    setModeSwitched(!modeSwitched);
+    setModeSwitched((mode) => !mode);
+    router.push(modeSwitched ? "/speaking" : "/listening");
   };
 
-  const { Modal, closeModal } = useModal();
-
   useEffect(() => {
-    // use nav slice to set location
     dispatch(
       setLocation({ location: modeSwitched ? "speaking" : "listening" })
     );
-    router.push(modeSwitched ? "/speaking" : "/listening");
   }, [modeSwitched]);
 
   return (
     <Wrapper>
-      <Modal onClose={() => console.log("Closed")}>
-        <div>Hello modal</div>
-      </Modal>
-
       <Container>
         <div className="inner-container">
           <p>{mode.toUpperCase()}</p>
