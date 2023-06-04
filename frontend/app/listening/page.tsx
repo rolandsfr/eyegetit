@@ -8,7 +8,7 @@ import Input from "../components/Input/Input";
 
 import ControlPanel from "../components/ControlPanel/ControlPanel";
 
-import { useEffect } from "react";
+import { useState } from "react";
 import { useAppSelector } from "../hooks/useAppSelector";
 
 import CardRow from "../components/CardRow/CardRow";
@@ -36,13 +36,14 @@ const StyledWrapper = styled.main`
 
 const Listening = () => {
   const { cards } = useAppSelector((state) => state.cards);
+  const [transcript, setTranscript] = useState("");
 
   return (
     <StyledWrapper>
       <Container>
         <CardRow />
-        <Input />
-        <ControlPanel />
+        <Input value={transcript} />
+        <ControlPanel onTranscriptChange={setTranscript} />
       </Container>
     </StyledWrapper>
   );

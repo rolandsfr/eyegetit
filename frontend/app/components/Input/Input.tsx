@@ -9,8 +9,12 @@ const Textarea = styled.textarea`
   box-sizing: border-box;
 `;
 
-const Input: React.FC = () => {
-  return <Textarea></Textarea>;
+interface InputProps {
+  value: string;
+}
+
+const Input: React.FC<InputProps> = ({value}) => {
+  return <Textarea defaultValue={value} />;
 };
 
 export default Input;

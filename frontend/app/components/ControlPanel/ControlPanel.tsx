@@ -23,14 +23,16 @@ const Wrapper = styled.div`
   padding: 1em;
 `;
 
-const ControlPanel: React.FC<{ omitRecord?: boolean }> = ({ omitRecord }) => {
+interface ControlPanelProps {
+  onTranscriptChange: (transcript: string) => void;
+  omitRecord?: boolean;
+}
+
+const ControlPanel: React.FC<ControlPanelProps> = ({ onTranscriptChange, omitRecord }) => {
   const [recordingState, setRecordingState] = useState(false);
   const {
     transcript,
-    listening,
     resetTranscript,
-    browserSupportsSpeechRecognition,
-    isMicrophoneAvailable,
   } = useSpeechRecognition();
 
   const fetchPictures = async () => {
@@ -70,8 +72,8 @@ const ControlPanel: React.FC<{ omitRecord?: boolean }> = ({ omitRecord }) => {
   };
 
   useEffect(() => {
-    console.log(transcript);
-  }, [transcript]);
+    onTranscriptChange(transcript);
+  }, [onTranscriptChange, transcript]);
 
   return (
     <Wrapper className="panel">
