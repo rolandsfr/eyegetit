@@ -4,13 +4,14 @@ import "core-js/stable";
 import styled from "styled-components";
 import Button from "../../styled/Button";
 import axios from "axios";
-import { setCards } from "@/app/redux/slices/cardsSlice";
 import { useEffect, useState } from "react";
 import store from "../../redux/store";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import { useAppSelector } from "@/app/hooks/useAppSelector";
+import { useAppDispatch } from "@/app/hooks/useAppDispatch";
+import { setCards } from "@/app/redux/slices/cardsSlice";
 
 const Wrapper = styled.div`
   display: flex;
@@ -43,6 +44,7 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
   const [playingText, setPlayingText] = useState("");
   const { query } = useAppSelector((state) => state.cards);
 
+  const dispatch = useAppDispatch();
   const { transcript, resetTranscript } = useSpeechRecognition();
 
   const toggleRecording = async () => {
@@ -169,6 +171,7 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
         onClick={() => {
           onClear ? onClear() : {};
           resetTranscript();
+          dispatch(setCards([]));
         }}
       >
         Clear

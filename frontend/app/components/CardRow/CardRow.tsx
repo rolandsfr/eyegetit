@@ -24,7 +24,7 @@ export interface CardPlaceholder {
 interface CardRowProps {
   cards: CardInterface[];
   onCardSelect?: (card: CardInterface) => void;
-  modalOpener: () => any;
+  modalOpener?: () => any;
 }
 
 const InitialPlaceholder: CardPlaceholder = {
@@ -65,6 +65,8 @@ const CardRow: React.FC<CardRowProps> = ({
     }
 
     setCardsComponents([...cardComponents, ...emptyObjects]);
+
+    console.log(cards);
   }, [cards]);
 
   return (
@@ -72,7 +74,7 @@ const CardRow: React.FC<CardRowProps> = ({
       {cardComponents.map((card: any, index: any) => {
         return (
           <ImageContainer
-            modalOpener={modalOpener}
+            modalOpener={modalOpener || (() => {})}
             key={index}
             word={card?.word}
             url={card?.url}
