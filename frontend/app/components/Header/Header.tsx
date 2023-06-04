@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Container from "../../styled/Container";
-import { setLocation } from "../../redux/slices/navSlice";
 import { useAppSelector } from "@/app/hooks/useAppSelector";
 import { useEffect, useState } from "react";
 import Toggle from "react-toggle";
@@ -32,7 +31,6 @@ const Wrapper = styled.header`
 `;
 
 const Header: React.FC = () => {
-  const { mode } = useAppSelector((state) => state.navigation);
   const path = usePathname();
 
   const [modeSwitched, setModeSwitched] = useState(path === "/speaking" ? true : false);
@@ -40,21 +38,22 @@ const Header: React.FC = () => {
   const router = useRouter();
 
   const handleSwitchChange = () => {
-    setModeSwitched((mode) => !mode);
-    router.push(modeSwitched ? "/speaking" : "/listening");
+    setModeSwitched((modeSwitched) => !modeSwitched);
+    router.push(modeSwitched ? "/listening" : "/speaking");
   };
 
-  useEffect(() => {
-    dispatch(
-      setLocation({ location: modeSwitched ? "speaking" : "listening" })
-    );
-  }, [modeSwitched]);
+  // useEffect(() => {
+  //   dispatch(
+  //     setLocation({ location: modeSwitched ? "speaking" : "listening" })
+  //   );
+  // }, [modeSwitched]);
 
   return (
     <Wrapper>
       <Container>
         <div className="inner-container">
-          <p>{mode.toUpperCase()}</p>
+          {/* <p>{mode.toUpperCase()}</p> */}
+          {<p>{modeSwitched ? 'speaking' : 'listening'}</p>}
           <Toggle
             checked={modeSwitched}
             onChange={handleSwitchChange}
