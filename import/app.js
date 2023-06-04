@@ -11,6 +11,17 @@ const pool = mariadb.createPool({
     database: process.env.DB_NAME
 });
 
+
+
+const args = process.argv
+if (args.length < 3) {
+    console.log('Please provide a file name')
+    process.exit(9)
+}
+
+const fileName = args[2]
+console.log('Importing file: ' + fileName)
+
 const getConnection = function(){
     return new Promise(function(resolve,reject){
         pool.getConnection().then(function(connection){
@@ -21,7 +32,7 @@ const getConnection = function(){
     });
 }
 
-const content = fs.readFileSync('./words.json', 'utf8')
+const content = fs.readFileSync(`./${fileName}`, 'utf8')
 const collection = JSON.parse(content)
 
 const insertQueue = []
