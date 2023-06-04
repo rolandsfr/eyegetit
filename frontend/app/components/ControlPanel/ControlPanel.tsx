@@ -74,7 +74,9 @@ const ControlPanel: React.FC<ControlPanelProps> = ({ onTranscriptChange, omitRec
   };
 
   useEffect(() => {
-    onTranscriptChange(transcript);
+    if (onTranscriptChange) {
+      onTranscriptChange(transcript);
+    }
   }, [onTranscriptChange, transcript]);
 
   return (
