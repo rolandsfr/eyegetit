@@ -1,6 +1,9 @@
 const axios = require('axios')
 
 function PrepareImageUrl(keyword) {
+    if (!keyword) {
+        return ''
+    }
     const name = prepareImageName(keyword)
     return`${process.env.IMAGE_BASE_URL}/${name}/${name}.jpg`
 }
