@@ -2,6 +2,7 @@ import styled, { StyledComponent } from "styled-components";
 import { useEffect, useRef } from "react";
 import { useAppSelector } from "@/app/hooks/useAppSelector";
 import type { CardInterface } from "@/app/components/CardRow/CardRow";
+import { useModal } from "../Modal/Modal";
 
 const Wrapper = styled.div`
   display: flex;
@@ -60,12 +61,14 @@ const WordContainer = styled.div<{ word: string | null | undefined }>`
 
 interface ImageContainerProps extends CardInterface {
   onClick?: (card: CardInterface) => void;
+  modalOpener: () => any;
 }
 
 const ImageContainer: React.FC<ImageContainerProps> = ({
   url,
   word,
   onClick,
+  modalOpener,
 }) => {
   const container = useRef<HTMLDivElement>(null);
 
@@ -81,7 +84,7 @@ const ImageContainer: React.FC<ImageContainerProps> = ({
         }}
       >
         {!url && word ? (
-          <div className="no-pic">
+          <div className="no-pic" onClick={modalOpener}>
             <h3>Image is missing</h3>
             <p>Press to create an image</p>
           </div>

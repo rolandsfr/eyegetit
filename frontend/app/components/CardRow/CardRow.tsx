@@ -24,6 +24,7 @@ export interface CardPlaceholder {
 interface CardRowProps {
   cards: CardInterface[];
   onCardSelect?: (card: CardInterface) => void;
+  modalOpener: () => any;
 }
 
 const InitialPlaceholder: CardPlaceholder = {
@@ -31,15 +32,26 @@ const InitialPlaceholder: CardPlaceholder = {
   url: null,
 };
 
-const EmptyRow = [InitialPlaceholder, InitialPlaceholder, InitialPlaceholder, InitialPlaceholder]
+const EmptyRow = [
+  InitialPlaceholder,
+  InitialPlaceholder,
+  InitialPlaceholder,
+  InitialPlaceholder,
+];
 
-const CardRow: React.FC<CardRowProps> = ({ cards, onCardSelect }) => {
-  const [cardComponents, setCardsComponents] = useState<CardPlaceholder[]>(EmptyRow);
+const CardRow: React.FC<CardRowProps> = ({
+  cards,
+  onCardSelect,
+  modalOpener,
+}) => {
+  const [cardComponents, setCardsComponents] =
+    useState<CardPlaceholder[]>(EmptyRow);
 
   useEffect(() => {
     const placeholdersToAppend =
       cardComponents.length < cards.length
-        ? Math.ceil(cards.length / EmptyRow.length) * EmptyRow.length - cards.length
+        ? Math.ceil(cards.length / EmptyRow.length) * EmptyRow.length -
+          cards.length
         : 0;
 
     cards.forEach((card, index) => {
@@ -60,10 +72,11 @@ const CardRow: React.FC<CardRowProps> = ({ cards, onCardSelect }) => {
       {cardComponents.map((card: any, index: any) => {
         return (
           <ImageContainer
+            modalOpener={modalOpener}
             key={index}
             word={card?.word}
             url={card?.url}
-            onClick={(card) => onCardSelect ? onCardSelect(card) : {}}
+            onClick={(card) => (onCardSelect ? onCardSelect(card) : {})}
           />
         );
       })}

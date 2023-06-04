@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import { useAppSelector } from "../hooks/useAppSelector";
 
 import CardRow from "../components/CardRow/CardRow";
+import { useModal } from "../components/Modal/Modal";
 
 const StyledWrapper = styled.main`
   width: 100%;
@@ -35,23 +36,36 @@ const StyledWrapper = styled.main`
   .panel {
     margin-top: 1em;
   }
+
+  .add-image-container {
+    display: flex;
+    gap: 2em;
+
+    .option {
+      background: #ffffff;
+      box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+      border-radius: 15px;
+      padding: 2em;
+
+      p {
+        max-width: 100px;
+        line-height: 1.3;
+      }
+    }
+  }
 `;
 
 const Listening = () => {
   const [transcript, setTranscript] = useState<string | undefined>();
   const [inputText, setInputText] = useState("");
   const { cards } = useAppSelector((state) => state.cards);
-
-  useEffect(() => {
-    console.log(cards);
-    // pass it to
-    // <CardRow cards={[]} />
-  }, [cards]);
+  const { Modal, openModal, closeModal } = useModal();
 
   return (
     <StyledWrapper>
       <Container>
         <CardRow
+          modalOpener={openModal}
           cards={cards.map((obj) => ({ url: obj.image, word: obj.word }))}
         />
         <Input
@@ -66,6 +80,16 @@ const Listening = () => {
           }}
         />
       </Container>
+      <Modal>
+        <div className="add-image-container">
+          <div className="option">
+            <p>Upload image from storage</p>
+          </div>
+          <div className="option">
+            <p>Capture image with camera</p>
+          </div>
+        </div>
+      </Modal>
     </StyledWrapper>
   );
 };

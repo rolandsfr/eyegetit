@@ -1,11 +1,38 @@
 import React, { useEffect, useState, useCallback } from "react";
+import styled from "styled-components";
 
 interface ModalProps {
   children: React.ReactNode;
-  onClose: () => void;
+  onClose?: () => void;
 }
 
 type OpenListener = () => void;
+
+const ModalWrapper = styled.div`
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  box-shadow: 5px 5px 15px 1px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 15px;
+
+  .modal-content {
+    padding: 8em;
+    position: relative;
+  }
+
+  .close-button {
+    position: absolute;
+    right: 0em;
+    top: 0em;
+    padding: 2em;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+  }
+`;
 
 export const useModal = () => {
   const openListeners: OpenListener[] = [];
@@ -24,7 +51,7 @@ export const useModal = () => {
 
     const closeMe = () => {
       setOpen(false);
-      onClose();
+      if (onClose) onClose();
     };
 
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -45,14 +72,17 @@ export const useModal = () => {
     }, []);
 
     return (
-      <div className="modal" style={{ display: !open ? "none" : "block" }}>
+      <ModalWrapper
+        className="modal"
+        style={{ display: !open ? "none" : "block" }}
+      >
         <div className="modal-content">
           <button className="close-button" onClick={() => closeMe()}>
-            X
+            &times;
           </button>
           {children}
         </div>
-      </div>
+      </ModalWrapper>
     );
   };
 

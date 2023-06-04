@@ -101,7 +101,7 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
         const cards = res.data.data.map((card) => {
           return {
             image: card.image,
-            word: card.card,
+            word: card.card.replace(/_/g, " "),
           };
         });
 

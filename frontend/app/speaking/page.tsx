@@ -98,7 +98,7 @@ const Speaking = () => {
             const url = res.data.words[0].url;
 
             return {
-              word: cat.category,
+              word: cat.category.replace(/_/g, " "),
               url,
             };
           })
