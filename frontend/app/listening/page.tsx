@@ -1,5 +1,7 @@
 "use client";
 
+import 'regenerator-runtime/runtime'
+
 import styled from "styled-components";
 import Container from "../styled/Container";
 
