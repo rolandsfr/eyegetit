@@ -45,7 +45,15 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
   const { query } = useAppSelector((state) => state.cards);
 
   const dispatch = useAppDispatch();
-  const { transcript, resetTranscript } = useSpeechRecognition();
+  const { transcript, resetTranscript, browserSupportsSpeechRecognition } = useSpeechRecognition();
+
+  useEffect(() => {
+    if (browserSupportsSpeechRecognition) {
+      alert("== BROWSER SUPPORTS");
+    } else {
+      alert("== BROWSER DOES NOT SUPPORT");
+    }
+  }, []);
 
   const toggleRecording = async () => {
     setRecordingState(!recordingState);
