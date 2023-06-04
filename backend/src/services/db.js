@@ -6,7 +6,9 @@ const pool = mariadb.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
+    database: process.env.DB_NAME,
+    bigIntAsNumber: true,
+    decimalAsNumber: true,
 });
 
 // here we are exposing the ability to creating new connections
