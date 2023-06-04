@@ -1,3 +1,5 @@
+"use client";
+
 import "core-js/stable";
 import styled from "styled-components";
 import Button from "../../styled/Button";
