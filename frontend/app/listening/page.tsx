@@ -1,6 +1,6 @@
 "use client";
 
-import 'regenerator-runtime/runtime'
+import "regenerator-runtime/runtime";
 
 import styled from "styled-components";
 import Container from "../styled/Container";
@@ -11,7 +11,7 @@ import Input from "../components/Input/Input";
 import ControlPanel from "../components/ControlPanel/ControlPanel";
 import Header from "../components/Header/Header";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppSelector } from "../hooks/useAppSelector";
 
 import CardRow from "../components/CardRow/CardRow";
@@ -40,16 +40,30 @@ const StyledWrapper = styled.main`
 const Listening = () => {
   const [transcript, setTranscript] = useState<string | undefined>();
   const [inputText, setInputText] = useState("");
+  const { cards } = useAppSelector((state) => state.cards);
+
+  useEffect(() => {
+    console.log(cards);
+    // pass it to
+    // <CardRow cards={[]} />
+  }, [cards]);
 
   return (
     <StyledWrapper>
       <Container>
-        <CardRow cards={[]} />
-        <Input definedValue={transcript} onValueChanged={(value) => setInputText(value)} />
+        <CardRow
+          cards={cards.map((obj) => ({ url: obj.image, word: obj.word }))}
+        />
+        <Input
+          definedValue={transcript}
+          onValueChanged={(value) => setInputText(value)}
+        />
         <ControlPanel
           onTranscriptChange={(value) => setTranscript(value)}
           resolveTextToPlay={() => inputText}
-          onClear={() => { setInputText(""); }}
+          onClear={() => {
+            setInputText("");
+          }}
         />
       </Container>
     </StyledWrapper>

@@ -93,7 +93,7 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
               image: string;
             }
           ];
-        }>("http://192.168.8.217:3001/input", {
+        }>(`${process.env.NEXT_PUBLIC_HOST}/input`, {
           input_text: query,
         });
 
