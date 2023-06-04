@@ -11,6 +11,7 @@ router.put('/', async (req, res) => {
     }
     console.log('input_text:', input_text);
     const data = await sendMessage(input_text)
+
     data.forEach((item) => {
         item.image = PrepareImageUrl(item.card)
     })
