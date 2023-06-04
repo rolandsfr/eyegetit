@@ -1,0 +1,473 @@
+{
+    "Write": [
+        "Action"
+    ],
+    "Ready": [
+        "State",
+        "Feeling"
+    ],
+    "Right": [
+        "Navigation"
+    ],
+    "Dislike": [
+        "Action"
+    ],
+    "Shout": [
+        "Action"
+    ],
+    "Morning": [
+        "Time"
+    ],
+    "Safe": [
+        "State",
+        "Feeling"
+    ],
+    "Green": [
+        "Color"
+    ],
+    "Home": [
+        "Place",
+        "Navigation"
+    ],
+    "Gray": [
+        "Color"
+    ],
+    "Sick": [
+        "State",
+        "Feeling"
+    ],
+    "Full": [
+        "State",
+        "Feeling"
+    ],
+    "Sell": [
+        "Action"
+    ],
+    "Please": [
+        "Action"
+    ],
+    "Like": [
+        "Action"
+    ],
+    "Wait": [
+        "Action"
+    ],
+    "Learn": [
+        "Action"
+    ],
+    "Walk": [
+        "Action"
+    ],
+    "Happy": [
+        "State",
+        "Feeling"
+    ],
+    "Magenta": [
+        "Color"
+    ],
+    "Go": [
+        "Action",
+        "Navigation"
+    ],
+    "Close": [
+        "Action"
+    ],
+    "Say": [
+        "Action"
+    ],
+    "Dressup": [
+        "Action"
+    ],
+    "Empty": [
+        "State",
+        "Feeling"
+    ],
+    "Need": [
+        "State",
+        "Feeling",
+        "Action"
+    ],
+    "Big": [
+        "State",
+        "Feeling"
+    ],
+    "Blue": [
+        "Color"
+    ],
+    "Sad": [
+        "State",
+        "Feeling"
+    ],
+    "Ask": [
+        "Action"
+    ],
+    "No": [
+        "State",
+        "Feeling",
+        "Action"
+    ],
+    "Love": [
+        "Action"
+    ],
+    "Today": [
+        "Time"
+    ],
+    "Out": [
+        "State",
+        "Feeling"
+    ],
+    "Less": [
+        "State",
+        "Feeling"
+    ],
+    "Loud": [
+        "State",
+        "Feeling"
+    ],
+    "Toothache": [
+        "State",
+        "Feeling"
+    ],
+    "Sleep": [
+        "Action"
+    ],
+    "Tomorrow": [
+        "Time"
+    ],
+    "Headache": [
+        "State",
+        "Feeling"
+    ],
+    "Slow": [
+        "State",
+        "Feeling"
+    ],
+    "Sit": [
+        "Action"
+    ],
+    "In": [
+        "State",
+        "Feeling"
+    ],
+    "Cyan": [
+        "Color"
+    ],
+    "Park": [
+        "Place",
+        "Navigation"
+    ],
+    "Hard": [
+        "State",
+        "Feeling"
+    ],
+    "Cabinet": [
+        "Place",
+        "Home"
+    ],
+    "Bad": [
+        "State",
+        "Feeling"
+    ],
+    "Read": [
+        "Action"
+    ],
+    "Here": [
+        "Navigation",
+        "Place"
+    ],
+    "Family": [
+        "Personality"
+    ],
+    "Left": [
+        "State",
+        "Feeling"
+    ],
+    "Pay": [
+        "Action",
+        "Store"
+    ],
+    "Standup": [
+        "Action"
+    ],
+    "Clean_teeth": [
+        "Action"
+    ],
+    "Listen": [
+        "Action"
+    ],
+    "Fast": [
+        "State",
+        "Feeling"
+    ],
+    "Over": [
+        "State",
+        "Feeling"
+    ],
+    "Bus_stop": [
+        "Place",
+        "Navigation"
+    ],
+    "Get": [
+        "Action"
+    ],
+    "Outside": [
+        "Navigation"
+    ],
+    "Stop": [
+        "Action"
+    ],
+    "Jump": [
+        "Action"
+    ],
+    "Inside": [
+        "Navigation"
+    ],
+    "Small": [
+        "State",
+        "Feeling"
+    ],
+    "Thirsty": [
+        "State",
+        "Feeling"
+    ],
+    "Quiet": [
+        "State",
+        "Feeling"
+    ],
+    "More": [
+        "State",
+        "Feeling"
+    ],
+    "Question": [
+        "Action"
+    ],
+    "Number_10": [
+        "Number"
+    ],
+    "Number_8": [
+        "Number"
+    ],
+    "Lonely": [
+        "State",
+        "Feeling"
+    ],
+    "Red": [
+        "Color"
+    ],
+    "Lime": [
+        "Color"
+    ],
+    "Clean": [
+        "State",
+        "Feeling"
+    ],
+    "Eat": [
+        "Action"
+    ],
+    "Angry": [
+        "State",
+        "Feeling"
+    ],
+    "Thank you": [
+        "Action"
+    ],
+    "Soft": [
+        "State",
+        "Feeling"
+    ],
+    "Cold": [
+        "State",
+        "Feeling"
+    ],
+    "Good": [
+        "State",
+        "Feeling"
+    ],
+    "Take": [
+        "Action"
+    ],
+    "Up": [
+        "State",
+        "Feeling"
+    ],
+    "Now": [
+        "Time"
+    ],
+    "Work": [
+        "Action",
+        "Place",
+        "Navigation"
+    ],
+    "Purple": [
+        "Color"
+    ],
+    "Better": [
+        "State",
+        "Feeling"
+    ],
+    "Stand": [
+        "Action"
+    ],
+    "Hot": [
+        "State",
+        "Feeling"
+    ],
+    "Dirty": [
+        "State",
+        "Feeling"
+    ],
+    "Light": [
+        "State",
+        "Feeling"
+    ],
+    "Wash": [
+        "Action"
+    ],
+    "Down": [
+        "Navigation"
+    ],
+    "Later": [
+        "Time"
+    ],
+    "Dark": [
+        "State",
+        "Feeling"
+    ],
+    "Hungry": [
+        "State",
+        "Feeling"
+    ],
+    "Find": [
+        "Action"
+    ],
+    "There": [
+        "Navigation"
+    ],
+    "Yellow": [
+        "Color"
+    ],
+    "Run": [
+        "Action"
+    ],
+    "Yes": [
+        "Action"
+    ],
+    "Afternoon": [
+        "Time"
+    ],
+    "Play": [
+        "Action"
+    ],
+    "Day": [
+        "Time"
+    ],
+    "Night": [
+        "Time"
+    ],
+    "White": [
+        "Color"
+    ],
+    "Evening": [
+        "Time"
+    ],
+    "Give": [
+        "Action"
+    ],
+    "On": [
+        "State",
+        "Feeling"
+    ],
+    "Stomachache": [
+        "State",
+        "Feeling"
+    ],
+    "Black": [
+        "Color"
+    ],
+    "Buy": [
+        "Action",
+        "Store"
+    ],
+    "Under": [
+        "State",
+        "Feeling"
+    ],
+    "Drink": [
+        "Action"
+    ],
+    "Open": [
+        "Action"
+    ],
+    "Rest": [
+        "Action",
+        "State",
+        "Feeling"
+    ],
+    "Help": [
+        "Action"
+    ],
+    "Clock_10": [
+        "Time"
+    ],
+    "Clock_9": [
+        "Time"
+    ],
+    "Clock_8": [
+        "Time"
+    ],
+    "Clock_11": [
+        "Time"
+    ],
+    "Clock_12": [
+        "Time"
+    ],
+    "Clock_6": [
+        "Time"
+    ],
+    "Clock_7": [
+        "Time"
+    ],
+    "Clock_5": [
+        "Time"
+    ],
+    "Clock_4": [
+        "Time"
+    ],
+    "Clock_1": [
+        "Time"
+    ],
+    "Clock_3": [
+        "Time"
+    ],
+    "Clock_2": [
+        "Time"
+    ],
+    "Pain": [
+        "State",
+        "Feeling"
+    ],
+    "Awake": [
+        "State",
+        "Feeling"
+    ],
+    "Orange": [
+        "Color"
+    ],
+    "Store": [
+        "Place",
+        "Store"
+    ],
+    "Talk": [
+        "Action"
+    ],
+    "Off": [
+        "State",
+        "Feeling",
+        "Action"
+    ],
+        "Want": [
+        "State",
+        "Feeling",
+        "Action"
+    ]
+}

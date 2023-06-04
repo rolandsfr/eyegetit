@@ -1,0 +1,417 @@
+{
+    "Apple": [
+        "Fruit",
+        "Food"
+    ],
+    "Green_trafficlight": [
+        "Navigation"
+    ],
+    "Red_trafficlight": [
+        "Navigation"
+    ],
+    "Cat": [
+        "Animal"
+    ],
+    "Blueberry": [
+        "Fruit",
+        "Food"
+    ],
+    "Microwave": [
+        "Place",
+        "Home"
+    ],
+    "Lamp": [
+        "Object",
+        "Home"
+    ],
+    "Toaster": [
+        "Home"
+    ],
+    "Wardrobe": [
+        "Place",
+        "Home"
+    ],
+    "Pear": [
+        "Fruit",
+        "Food"
+    ],
+    "Strawberry": [
+        "Fruit",
+        "Food"
+    ],
+    "Policeman": [
+        "Personality"
+    ],
+    "Avocado": [
+        "Vegetable",
+        "Food"
+    ],
+    "Clams": [
+        "Fish_or_meat",
+        "Food"
+    ],
+    "Car_blue": [
+        "Navigation"
+    ],
+    "Car_yellow": [
+        "Navigation"
+    ],
+    "Car_red": [
+        "Navigation"
+    ],
+    "Car": [
+        "Navigation"
+    ],
+    "Crab": [
+        "Fish_or_meat",
+        "Food"
+    ],
+    "Pomegranate": [
+        "Fruit",
+        "Food"
+    ],
+    "Friend": [
+        "State",
+        "Feeling",
+        "Person"
+    ],
+    "Bath": [
+        "Place",
+        "Home"
+    ],
+    "Bed": [
+        "Place",
+        "Home"
+    ],
+    "Dryer": [
+        "Object",
+        "Home"
+    ],
+    "Pumpkin": [
+        "Vegetable",
+        "Food"
+    ],
+    "Spinach": [
+        "Vegetable",
+        "Food"
+    ],
+    "Beef": [
+        "Fish_or_meat",
+        "Food"
+    ],
+    "Tuna": [
+        "Fish_or_meat",
+        "Food"
+    ],
+    "Lettuce": [
+        "Vegetable",
+        "Food"
+    ],
+    "Desk": [
+        "Place",
+        "Home"
+    ],
+    "Fig": [
+        "Fruit",
+        "Food"
+    ],
+    "Television": [
+        "Home"
+    ],
+    "Kiwi": [
+        "Fruit",
+        "Food"
+    ],
+    "Mushroom": [
+        "Food",
+        "Vegetable"
+    ],
+    "Dog": [
+        "Animal"
+    ],
+    "Vacuum_cleaner": [
+        "Object",
+        "Home"
+    ],
+    "Lemon": [
+        "Fruit",
+        "Food"
+    ],
+    "Onion": [
+        "Vegetable",
+        "Food"
+    ],
+    "Garden": [
+        "Place"
+    ],
+    "Bathroom": [
+        "Place",
+        "Home"
+    ],
+    "Heater": [
+        "Home"
+    ],
+    "Milk": [
+        "Food"
+    ],
+    "Grapefruit": [
+        "Fruit",
+        "Food"
+    ],
+    "Potato": [
+        "Vegetable",
+        "Food"
+    ],
+    "Squid": [
+        "Fish_or_meat",
+        "Food"
+    ],
+    "Honeydew": [
+        "Fruit",
+        "Food"
+    ],
+    "Raspberry": [
+        "Fruit",
+        "Food"
+    ],
+    "Lobster": [
+        "Fish_or_meat",
+        "Food"
+    ],
+    "Pork": [
+        "Fish_or_meat",
+        "Food"
+    ],
+    "Doctor": [
+        "Personality",
+        "Place"
+    ],
+    "Cucumber": [
+        "Vegetable",
+        "Food"
+    ],
+    "Blackberry": [
+        "Fruit",
+        "Food"
+    ],
+    "Coffee_maker": [
+        "Place",
+        "Home"
+    ],
+    "Oven": [
+        "Place",
+        "Home"
+    ],
+    "Chair": [
+        "Home"
+    ],
+    "Cheese": [
+        "Food"
+    ],
+    "Bus_blue": [
+        "Navigation"
+    ],
+    "Bus": [
+        "Navigation"
+    ],
+    "Bus_red": [
+        "Navigation"
+    ],
+    "I": [
+        "Personality"
+    ],
+    "Plum": [
+        "Fruit",
+        "Food"
+    ],
+    "Cherry": [
+        "Fruit",
+        "Food"
+    ],
+    "Watermelon": [
+        "Fruit",
+        "Food"
+    ],
+    "Cantaloupe": [
+        "Fruit",
+        "Food"
+    ],
+    "Police_department": [
+        "Place",
+        "Navigation"
+    ],
+    "Air_conditioner": [
+        "Object",
+        "Home"
+    ],
+    "Toilet": [
+        "Place",
+        "Home"
+    ],
+    "Hospital": [
+        "Place",
+        "Navigation"
+    ],
+    "Mango": [
+        "Fruit",
+        "Food"
+    ],
+    "Sofa": [
+        "Place",
+        "Home"
+    ],
+    "Shrimp": [
+        "Fish_or_meat",
+        "Food"
+    ],
+    "Cabbage": [
+        "Vegetable",
+        "Food"
+    ],
+    "Coconut": [
+        "Fruit",
+        "Food"
+    ],
+    "Butter": [
+        "Food"
+    ],
+    "Scallops": [
+        "Fish_or_meat",
+        "Food"
+    ],
+    "Table": [
+        "Place",
+        "Home"
+    ],
+    "Grapes": [
+        "Fruit",
+        "Food"
+    ],
+    "Mussels": [
+        "Fish_or_meat",
+        "Food"
+    ],
+    "Cupboard": [
+        "Home"
+    ],
+    "Medicine": [
+        "Home"
+    ],
+    "Airport": [
+        "Place",
+        "Navigation"
+    ],
+    "Food": [
+        "Food"
+    ],
+    "Corn": [
+        "Vegetable",
+        "Food"
+    ],
+    "Phone": [
+        "Home"
+    ],
+    "Street": [
+        "Navigation"
+    ],
+    "Ticket": [
+        "Navigation"
+    ],
+    "Eggs": [
+        "Food"
+    ],
+    "Chicken": [
+        "Fish_or_meat",
+        "Food"
+    ],
+    "Snails": [
+        "Fish_or_meat",
+        "Food"
+    ],
+    "Broccoli": [
+        "Vegetable",
+        "Food"
+    ],
+    "Bread": [
+        "Food"
+    ],
+    "Washing_machine": [
+        "Place",
+        "Home"
+    ],
+    "Fan": [
+        "Object",
+        "Home"
+    ],
+    "Banana": [
+        "Fruit",
+        "Food"
+    ],
+    "Shelf": [
+        "Home"
+    ],
+    "Octopus": [
+        "Fish_or_meat",
+        "Food"
+    ],
+    "You": [
+        "Personality"
+    ],
+    "Zucchini": [
+        "Vegetable",
+        "Food"
+    ],
+    "Fridge": [
+        "Home"
+    ],
+    "Papaya": [
+        "Fruit",
+        "Food"
+    ],
+    "Computer": [
+        "Home"
+    ],
+    "Garlic": [
+        "Vegetable",
+        "Food"
+    ],
+    "Pepper": [
+        "Vegetable",
+        "Food"
+    ],
+    "School": [
+        "Place"
+    ],
+    "Blender": [
+        "Place",
+        "Home"
+    ],
+    "Fish": [
+        "Fish_or_meat",
+        "Food"
+    ],
+    "Pineapple": [
+        "Fruit",
+        "Food"
+    ],
+    "Tomato": [
+        "Vegetable",
+        "Food"
+    ],
+    "Carrot": [
+        "Vegetable",
+        "Food"
+    ],
+    "Oysters": [
+        "Fish_or_meat",
+        "Food"
+    ],
+    "Salmon": [
+        "Fish_or_meat",
+        "Food"
+    ],
+    "Peach": [
+        "Fruit",
+        "Food"
+    ]
+}
