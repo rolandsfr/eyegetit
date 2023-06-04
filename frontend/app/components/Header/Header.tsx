@@ -5,7 +5,7 @@ import { useAppSelector } from "@/app/hooks/useAppSelector";
 import { useState } from "react";
 import Toggle from "react-toggle";
 import "react-toggle/style.css"; // for ES6 modules
-import Modal from "../Modal/Modal";
+import {useModal} from "../Modal/Modal";
 
 const Wrapper = styled.header`
   position: fixed;
@@ -37,9 +37,11 @@ const Header: React.FC = () => {
     setModeSwitched(!modeSwitched);
   };
 
+  const { Modal, closeModal } = useModal(() => console.log('Closed'));
+
   return (
     <Wrapper>
-      <Modal onClose={() => console.log('Close')}>
+      <Modal>
         <div>Hello modal</div>
       </Modal>
 
