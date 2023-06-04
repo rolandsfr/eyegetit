@@ -2,32 +2,40 @@ import React, { useEffect, useState, useCallback } from 'react';
 
 interface ModalProps {
   children: React.ReactNode;
+  onClose: () => void;
 }
 
-type OpenListener = (open: boolean) => void;
+type OpenListener = () => void;
 
 export const useModal = () => {
-  const listeners: OpenListener[] = [];
+  const openListeners: OpenListener[] = [];
+  const closeListeners: OpenListener[] = [];
 
   const closeModal = () => {
-    listeners.forEach((listener) => listener(false));
+    closeListeners.forEach((listener) => listener());
   };
 
   const openModal = () => {
-    listeners.forEach((listener) => listener(true));
+    openListeners.forEach((listener) => listener());
   };
 
-  const Modal: React.FC<ModalProps> = ({ children }) => {
+  const Modal: React.FC<ModalProps> = ({ children, onClose }) => {
     const [open, setOpen] = useState(true);
+
+    const closeMe = () => {
+      setOpen(false);
+      onClose();
+    };
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        setOpen(false);
+        closeMe();
       }
     };
 
     useEffect(() => {
-      listeners.push((value) => setOpen(value));
+      openListeners.push(() => setOpen(true));
+      closeListeners.push(() => closeMe());
 
       document.addEventListener('keydown', handleKeyDown);
 
@@ -39,7 +47,7 @@ export const useModal = () => {
     return (
       <div className="modal" style={{ display: !open ? 'none' : 'block'}}>
         <div className="modal-content">
-        <button className="close-button" onClick={() => setOpen(false)}>
+        <button className="close-button" onClick={() => closeMe()}>
             X
         </button>
         {children}

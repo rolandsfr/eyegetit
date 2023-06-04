@@ -37,11 +37,11 @@ const Header: React.FC = () => {
     setModeSwitched(!modeSwitched);
   };
 
-  const { Modal, closeModal } = useModal(() => console.log('Closed'));
+  const { Modal, closeModal } = useModal();
 
   return (
     <Wrapper>
-      <Modal>
+      <Modal onClose={() => console.log('Closed')}>
         <div>Hello modal</div>
       </Modal>
 
