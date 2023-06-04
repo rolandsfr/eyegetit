@@ -5,6 +5,7 @@ import { useAppSelector } from "@/app/hooks/useAppSelector";
 import { useState } from "react";
 import Toggle from "react-toggle";
 import "react-toggle/style.css"; // for ES6 modules
+import Modal from "../Modal/Modal";
 
 const Wrapper = styled.header`
   position: fixed;
@@ -38,6 +39,10 @@ const Header: React.FC = () => {
 
   return (
     <Wrapper>
+      <Modal onClose={() => console.log('Close')}>
+        <div>Hello modal</div>
+      </Modal>
+
       <Container>
         <div className="inner-container">
           <p>{mode.toUpperCase()}</p>
