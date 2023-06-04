@@ -39,7 +39,7 @@ const ControlPanel: React.FC<{ omitRecord?: boolean }> = ({ omitRecord }) => {
       SpeechRecognition.startListening({
         continuous: true,
         language: "english",
-        interimResults: false,
+        // interimResults: false,
       });
     } else {
       SpeechRecognition.abortListening();
@@ -71,7 +71,6 @@ const ControlPanel: React.FC<{ omitRecord?: boolean }> = ({ omitRecord }) => {
 
   useEffect(() => {
     console.log(transcript);
-    resetTranscript();
   }, [transcript]);
 
   return (

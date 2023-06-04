@@ -5,6 +5,7 @@ import { useAppSelector } from "@/app/hooks/useAppSelector";
 import { useEffect, useState } from "react";
 import Toggle from "react-toggle";
 import "react-toggle/style.css"; // for ES6 modules
+import { useModal } from "../Modal/Modal";
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 import { useRouter } from "next/navigation";
 
@@ -40,6 +41,8 @@ const Header: React.FC = () => {
     setModeSwitched(!modeSwitched);
   };
 
+  const { Modal, closeModal } = useModal();
+
   useEffect(() => {
     // use nav slice to set location
     dispatch(
@@ -50,6 +53,10 @@ const Header: React.FC = () => {
 
   return (
     <Wrapper>
+      <Modal onClose={() => console.log("Closed")}>
+        <div>Hello modal</div>
+      </Modal>
+
       <Container>
         <div className="inner-container">
           <p>{mode.toUpperCase()}</p>
