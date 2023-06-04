@@ -43,7 +43,6 @@ const Listening = () => {
 
   return (
     <StyledWrapper>
-      <Header />
       <Container>
         <CardRow cards={[]} />
         <Input definedValue={transcript} onValueChanged={(value) => setInputText(value)} />
