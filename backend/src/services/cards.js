@@ -3,7 +3,7 @@ const db = require('./db')
 function getAll() {
     const query = 'select * from images'
     return db.getConnection().then((conn) => {
-        return conn.query(query)
+        return conn.query(query).finally(() => {conn.release()})
     }).catch((err) => {
         console.error(err)
     })
@@ -12,7 +12,7 @@ function getAll() {
 function getAllForCategory(category) {
     const query = 'select * from images where category = ?'
     return db.getConnection().then((conn) => {
-        return conn.query(query, [category])
+        return conn.query(query, [category]).finally(() => {conn.release()})
     }).catch((err) => {
         console.error(err)
     })
@@ -21,9 +21,7 @@ function getAllForCategory(category) {
 function getCategories() {
     const query = 'SELECT category, count(*) as count FROM images GROUP BY category;'
     return db.getConnection().then((conn) => {
-        const res = conn.query(query)
-        console.log(res)
-        return res
+        return conn.query(query).finally(() => {conn.release()})
     }).catch((err) => {
         console.error(err)
     })
@@ -32,7 +30,7 @@ function getCategories() {
 function getCategoriesCount() {
     const query = 'SELECT COUNT (*) as total FROM  (SELECT * FROM images GROUP BY category) t;'
     return db.getConnection().then((conn) => {
-        return conn.query(query)
+        return conn.query(query).finally(() => {conn.release()})
     }).catch((err) => {
         console.error(err)
     })
