@@ -35,7 +35,12 @@ export default function RootLayout({
   }, [pathname]);
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body
+        style={{
+          paddingBottom: "8em",
+        }}
+        className={inter.className}
+      >
         <ReduxComponent>{children}</ReduxComponent>
       </body>
     </html>
