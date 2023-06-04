@@ -59,7 +59,7 @@ const Input: React.FC<InputProps> = ({ definedValue, onValueChanged }) => {
         ref={textareaRef}
         onChange={(e) => {
           handleInputChange();
-          return onValueChanged && definedValue != e.target.value
+          onValueChanged && definedValue != e.target.value
             ? onValueChanged(e.target.value)
             : {};
         }}

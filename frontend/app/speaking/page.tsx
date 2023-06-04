@@ -96,7 +96,7 @@ const Speaking = () => {
             const url = res.data.words[0].url;
 
             return {
-              name: cat.category,
+              word: cat.category,
               url,
             };
           })
