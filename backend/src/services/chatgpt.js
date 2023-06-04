@@ -41,7 +41,7 @@ All responses should be in JSON in the following format:
         const reply = choices[0].message.content;
         return JSON.parse(reply);
     } catch (error) {
-        console.error('Error:', error.response.data)
+        console.error('Error while handling response from ChatGPT', error)
         throw error;
     }
 }
