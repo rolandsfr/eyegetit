@@ -72,7 +72,11 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
   const pathname = usePathname();
 
   const dispatch = useAppDispatch();
-  const { transcript, resetTranscript } = useSpeechRecognition();
+  const { transcript, resetTranscript, browserSupportsSpeechRecognition } = useSpeechRecognition();
+
+  if (!browserSupportsSpeechRecognition) {
+    alert("Your browser does not support speech recognition. Please use keyboard.");
+  }
 
   const toggleRecording = async () => {
     setRecordingState(!recordingState);
