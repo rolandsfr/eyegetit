@@ -5,8 +5,10 @@ const initialState: {
     word: string;
     image: string;
   }[];
+  query: string | null;
 } = {
   cards: [],
+  query: null,
 };
 
 export const cardsSlice = createSlice({
@@ -17,16 +19,21 @@ export const cardsSlice = createSlice({
       state,
       action: PayloadAction<{ word: string; image: string }[]>
     ) => {
-      console.log(action.payload);
       return {
         ...state,
         cards: action.payload,
+      };
+    },
+    setQuery: (state, action: PayloadAction<string>) => {
+      return {
+        ...state,
+        query: action.payload,
       };
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setCards } = cardsSlice.actions;
+export const { setCards, setQuery } = cardsSlice.actions;
 
 export default cardsSlice.reducer;

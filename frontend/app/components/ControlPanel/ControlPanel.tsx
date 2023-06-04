@@ -10,6 +10,7 @@ import store from "../../redux/store";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
+import { useAppSelector } from "@/app/hooks/useAppSelector";
 
 const Wrapper = styled.div`
   display: flex;
@@ -32,16 +33,17 @@ interface ControlPanelProps {
   omitRecord?: boolean;
 }
 
-const ControlPanel: React.FC<ControlPanelProps> = ({ onTranscriptChange, resolveTextToPlay, onClear, omitRecord }) => {
+const ControlPanel: React.FC<ControlPanelProps> = ({
+  onTranscriptChange,
+  resolveTextToPlay,
+  onClear,
+  omitRecord,
+}) => {
   const [recordingState, setRecordingState] = useState(false);
   const [playingText, setPlayingText] = useState("");
+  const { query } = useAppSelector((state) => state.cards);
 
-
-
-  const {
-    transcript,
-    resetTranscript,
-  } = useSpeechRecognition();
+  const { transcript, resetTranscript } = useSpeechRecognition();
 
   const toggleRecording = async () => {
     setRecordingState(!recordingState);
@@ -81,6 +83,31 @@ const ControlPanel: React.FC<ControlPanelProps> = ({ onTranscriptChange, resolve
     // store.dispatch(setCards(cards));
   };
 
+  useEffect(() => {
+    (async () => {
+      const res = await axios.put<{
+        data: [
+          {
+            card: string;
+            image: string;
+          }
+        ];
+      }>("http://192.168.8.217:3001/input", {
+        input_text: query,
+      });
+
+      // array is in res.data.data
+      const cards = res.data.data.map((card) => {
+        return {
+          image: card.image,
+          word: card.card,
+        };
+      });
+
+      store.dispatch(setCards(cards));
+    })();
+  }, [query]);
+
   const playVoice = () => {
     if (!resolveTextToPlay) {
       return;
@@ -107,7 +134,8 @@ const ControlPanel: React.FC<ControlPanelProps> = ({ onTranscriptChange, resolve
     }
 
     const voices = window.speechSynthesis.getVoices();
-    const selectedVoice = voices.find((voice) => voice.name == 'Google US English') || voices[0];
+    const selectedVoice =
+      voices.find((voice) => voice.name == "Google US English") || voices[0];
 
     let utterance = new SpeechSynthesisUtterance(playingText);
 
@@ -135,7 +163,14 @@ const ControlPanel: React.FC<ControlPanelProps> = ({ onTranscriptChange, resolve
         </Button>
       )}
       <Button onClick={() => playVoice()}>Play</Button>
-      <Button onClick={() => { onClear ? onClear() : {}; resetTranscript() }}>Clear</Button>
+      <Button
+        onClick={() => {
+          onClear ? onClear() : {};
+          resetTranscript();
+        }}
+      >
+        Clear
+      </Button>
     </Wrapper>
   );
 };

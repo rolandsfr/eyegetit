@@ -1,5 +1,8 @@
 import { useRef } from "react";
 import styled from "styled-components";
+import { setQuery } from "@/app/redux/slices/cardsSlice";
+import { useAppDispatch } from "@/app/hooks/useAppDispatch";
+import { useState } from "react";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -12,7 +15,7 @@ const Wrapper = styled.div`
   margin-top: 1em;
   padding-bottom: 1em;
 
-  button {
+  button.submit {
     position: absolute;
     bottom: 0;
     right: 0;
@@ -43,6 +46,8 @@ interface InputProps {
 
 const Input: React.FC<InputProps> = ({ definedValue, onValueChanged }) => {
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const dispatch = useAppDispatch();
+  const [value, setValue] = useState<string>("");
 
   const handleInputChange = () => {
     const textarea = textareaRef.current;
@@ -59,13 +64,16 @@ const Input: React.FC<InputProps> = ({ definedValue, onValueChanged }) => {
         ref={textareaRef}
         onChange={(e) => {
           handleInputChange();
+          setValue(e.target.value);
           return onValueChanged && definedValue != e.target.value
             ? onValueChanged(e.target.value)
             : {};
         }}
         defaultValue={definedValue}
       ></Textarea>
-      <button className="submit">Submit</button>
+      <button className="submit" onClick={() => dispatch(setQuery(value))}>
+        Submit
+      </button>
     </Wrapper>
   );
 };
