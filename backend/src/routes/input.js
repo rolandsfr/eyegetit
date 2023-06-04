@@ -11,6 +11,7 @@ router.put('/', async (req, res) => {
     }
     console.log('input_text:', input_text);
     const data = await sendMessage(input_text)
+    console.log('data:', data)
 
     data.forEach((item) => {
         item.image = PrepareImageUrl(item.card)
@@ -18,9 +19,11 @@ router.put('/', async (req, res) => {
 
     const validated = []
     data.forEach((item) => {
-        validated.push(ValidateImageUrl(item.image).then((url) => {
-            item.image = url
-        }))
+        if (item.image) {
+            validated.push(ValidateImageUrl(item.image).then((url) => {
+                item.image = url
+            }))
+        }
     })
 
     await Promise.all(validated)
