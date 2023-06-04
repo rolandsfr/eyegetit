@@ -48,25 +48,21 @@ const CardRow: React.FC<CardRowProps> = ({
     useState<CardPlaceholder[]>(EmptyRow);
 
   useEffect(() => {
+    const newCardComponents = [...EmptyRow];
+
     const placeholdersToAppend =
-      cardComponents.length < cards.length
-        ? Math.ceil(cards.length / EmptyRow.length) * EmptyRow.length -
-          cards.length
-        : 0;
+      Math.ceil(cards.length / EmptyRow.length) * EmptyRow.length -
+        cards.length;
 
     cards.forEach((card, index) => {
-      cardComponents[index] = card;
+      newCardComponents[index] = card;
     });
 
-    const emptyObjects: CardPlaceholder[] = [];
-
     for (let i = 0; i < placeholdersToAppend; i++) {
-      emptyObjects.push(InitialPlaceholder);
+      newCardComponents.push(InitialPlaceholder);
     }
 
-    setCardsComponents([...cardComponents, ...emptyObjects]);
-
-    console.log(cards);
+    setCardsComponents(newCardComponents);
   }, [cards]);
 
   return (
