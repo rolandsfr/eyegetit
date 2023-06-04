@@ -2,12 +2,18 @@ version: '3.7'
 services:
   backend:
     image: backend:latest
-    build: ./backend/src
+    build:
+      context: ./backend/src
+      dockerfile: Dockerfile
     ports:
       - '3001:3000'
+    env_file:
+      - ./backend/src/.env
   frontend:
     image: frontend:latest
-    build: ./frontend/
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     ports:
       - '3000:3000'
   db:

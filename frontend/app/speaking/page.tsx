@@ -71,7 +71,7 @@ const Speaking = () => {
     if (cardSelection == "recommended") {
       (async () => {
         const res = await axios.get<{ words: CardInterface[] }>(
-          "http://192.168.8.217:3001/cards/list"
+          `${process.env.NEXT_PUBLIC_HOST}/cards/list`
         );
         const words = res.data.words.slice(0, 30);
         setWords(words);
@@ -80,13 +80,13 @@ const Speaking = () => {
       (async () => {
         const res = await axios.get<{
           categories: { category: string; count: number }[];
-        }>("http://192.168.8.217:3001/cards/categories");
+        }>(`${process.env.NEXT_PUBLIC_HOST}/cards/categories`);
         const categories = res.data.categories;
 
         const processedCategoies: CardInterface[] = await Promise.all(
           categories.map(async (cat) => {
             const res = await axios.get<{ words: { url: string }[] }>(
-              `http://192.168.8.217:3001/cards/list?cat=${cat.category}`
+              `${process.env.NEXT_PUBLIC_HOST}/cards/list?cat=${cat.category}`
             );
 
             const url = res.data.words[0].url;
@@ -106,7 +106,7 @@ const Speaking = () => {
     if (category) {
       (async () => {
         const res = await axios.get<{ words: CardInterface[] }>(
-          `http://192.168.8.217:3001/cards/list?cat=${category}`
+          `${process.env.NEXT_PUBLIC_HOST}/cards/list?cat=${category}`
         );
 
         const images = res.data.words;
