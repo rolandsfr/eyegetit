@@ -12,6 +12,7 @@ import SpeechRecognition, {
 import { useAppSelector } from "@/app/hooks/useAppSelector";
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 import { setCards } from "@/app/redux/slices/cardsSlice";
+import { usePathname } from "next/navigation";
 
 const Wrapper = styled.div`
   display: flex;
@@ -25,6 +26,31 @@ const Wrapper = styled.div`
   left: 0;
   right: 0;
   padding: 1em;
+  transition: 0.4s all;
+
+  button.listening {
+    background-color: #00009e;
+    color: #ffffff;
+    font-weight: bold;
+
+    &:hover {
+      background-color: #0000ed;
+    }
+  }
+
+  button.speaking {
+    color: #fff;
+    background-color: #009846 !important;
+
+    &:hover {
+      background-color: #00b955;
+    }
+  }
+
+  button.disabled {
+    color: #989898;
+    background-color: #ebebeb;
+  }
 `;
 
 interface ControlPanelProps {
@@ -43,6 +69,7 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
   const [recordingState, setRecordingState] = useState(false);
   const [playingText, setPlayingText] = useState("");
   const { query } = useAppSelector((state) => state.cards);
+  const pathname = usePathname();
 
   const dispatch = useAppDispatch();
   const { transcript, resetTranscript } = useSpeechRecognition();
@@ -54,35 +81,11 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
       SpeechRecognition.startListening({
         continuous: true,
         language: "english",
-        // interimResults: false,
       });
     } else {
       SpeechRecognition.abortListening();
       resetTranscript();
     }
-
-    // setRecordingState(!recordingState);
-    // const res = await axios.put<{
-    //   data: [
-    //     {
-    //       card: string;
-    //       image: string;
-    //     }
-    //   ];
-    // }>("http://192.168.8.217:3001/input", {
-    //   input_text:
-    //     "Would you like to go there by red car or yellow bus or random taxi",
-    // });
-
-    // // array is in res.data.data
-    // const cards = res.data.data.map((card) => {
-    //   return {
-    //     image: card.image,
-    //     word: card.card,
-    //   };
-    // });
-
-    // store.dispatch(setCards(cards));
   };
 
   useEffect(() => {
@@ -150,15 +153,17 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
     setPlayingText("");
   }, [playingText]);
 
+  console.log(pathname);
   return (
     <Wrapper className="panel">
       {omitRecord || (
         <Button
+          className={pathname == "/listening" ? "listening" : "speaking"}
           onClick={toggleRecording}
           style={
             recordingState
               ? {
-                  backgroundColor: "#F47474",
+                  backgroundColor: "#AF2B2B",
                 }
               : {}
           }
@@ -166,8 +171,14 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
           {!recordingState ? "Record" : "Stop recording"}
         </Button>
       )}
-      <Button onClick={() => playVoice()}>Play</Button>
       <Button
+        className={pathname == "/listening" ? "listening" : "speaking"}
+        onClick={() => playVoice()}
+      >
+        Play
+      </Button>
+      <Button
+        className={pathname == "/listening" ? "listening" : "speaking"}
         onClick={() => {
           onClear ? onClear() : {};
           resetTranscript();

@@ -11,6 +11,24 @@ const Wrapper = styled.div`
   align-items: stretch;
   border-radius: 10px 10px 0px 0px;
   margin-top: 1em;
+
+  /* button {
+    color: #fff;
+    background-color: #009846 !important;
+
+    &:hover {
+      background-color: #00b955;
+    }
+  } */
+
+  button {
+    color: #fff;
+  }
+
+  button.disabled {
+    background-color: #ebebeb;
+    color: #989898;
+  }
 `;
 
 const PanelButton: React.FC<{ option: CardSelectionOptions; name: string }> = ({
@@ -23,7 +41,7 @@ const PanelButton: React.FC<{ option: CardSelectionOptions; name: string }> = ({
   return (
     <Button
       style={{
-        backgroundColor: cardSelection === option ? "#E1E1E1" : "#F5F5F5",
+        backgroundColor: cardSelection === option ? "#009846" : "#00B955",
       }}
       onClick={() => dispatch(setCardSelectionMode(option))}
     >

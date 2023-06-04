@@ -19,6 +19,7 @@ const Wrapper = styled.div`
     gap: 1em;
     width: 80%;
     margin: 0 auto;
+    cursor: pointer;
 
     h3 {
       color: red;
@@ -84,7 +85,7 @@ const ImageContainer: React.FC<ImageContainerProps> = ({
         }}
       >
         {!url && word ? (
-          <div className="no-pic" onClick={modalOpener}>
+          <div className="no-pic" onClick={() => modalOpener()}>
             <h3>Image is missing</h3>
             <p>Press to create an image</p>
           </div>

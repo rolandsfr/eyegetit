@@ -7,6 +7,7 @@ import "react-toggle/style.css"; // for ES6 modules
 import { useModal } from "../Modal/Modal";
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 import { usePathname, useRouter } from "next/navigation";
+import { setCards } from "@/app/redux/slices/cardsSlice";
 
 const Wrapper = styled.header`
   position: fixed;
@@ -27,11 +28,13 @@ const Wrapper = styled.header`
 
   p {
     font-weight: bold;
+    color: #fff;
   }
 `;
 
 const Header: React.FC = () => {
   const path = usePathname();
+  const dispatch = useAppDispatch();
 
   const [modeSwitched, setModeSwitched] = useState(
     path === "/speaking" ? true : false
@@ -40,11 +43,16 @@ const Header: React.FC = () => {
 
   const handleSwitchChange = () => {
     setModeSwitched((modeSwitched) => !modeSwitched);
+    dispatch(setCards([]));
     router.push(modeSwitched ? "/listening" : "/speaking");
   };
 
   return (
-    <Wrapper>
+    <Wrapper
+      style={{
+        backgroundColor: modeSwitched ? "#009846" : "#00009E",
+      }}
+    >
       <Container>
         <div className="inner-container">
           {/* <p>{mode.toUpperCase()}</p> */}
