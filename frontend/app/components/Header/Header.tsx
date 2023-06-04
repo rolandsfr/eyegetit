@@ -60,7 +60,7 @@ const Header: React.FC = () => {
       <Container>
         <div className="inner-container">
           <p>{mode.toUpperCase()}</p>
-          <Toggle checked={modeSwitched} onChange={handleSwitchChange} />
+          <Toggle checked={modeSwitched} onChange={handleSwitchChange} icons={false} />
         </div>
       </Container>
     </Wrapper>
