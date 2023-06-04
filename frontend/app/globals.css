@@ -131,3 +131,13 @@ p,
 span {
   font-size: 1.6rem;
 }
+
+.preloader.loaded {
+  opacity: 0;
+  transition: all 1s;
+  display: none;
+}
+.preloader {
+  opacity: 1;
+  transition: all 1s;
+}

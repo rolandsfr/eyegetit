@@ -8,15 +8,30 @@ import store from "./redux/store";
 import { Provider } from "react-redux";
 import { useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
+import Preloader from "./components/Preloader/Preloader";
+import { useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 const ReduxComponent: React.FC<{ children: any }> = ({ children }) => {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+    }
+  }, []);
   return (
-    <Provider store={store}>
-      <Header />
-      {children}
-    </Provider>
+    <>
+      <Preloader loading={loading} />
+      {loading || (
+        <Provider store={store}>
+          <Header />
+          {children}
+        </Provider>
+      )}
+    </>
   );
 };
 
@@ -33,6 +48,7 @@ export default function RootLayout({
       router.push("/listening");
     }
   }, [pathname]);
+
   return (
     <html lang="en">
       <body
