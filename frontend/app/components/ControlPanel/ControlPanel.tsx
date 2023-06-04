@@ -23,7 +23,7 @@ const Wrapper = styled.div`
   padding: 1em;
 `;
 
-const ControlPanel: React.FC = () => {
+const ControlPanel: React.FC<{ omitRecord?: boolean }> = ({ omitRecord }) => {
   const [recordingState, setRecordingState] = useState(false);
   const {
     transcript,
@@ -76,18 +76,20 @@ const ControlPanel: React.FC = () => {
 
   return (
     <Wrapper className="panel">
-      <Button
-        onClick={fetchPictures}
-        style={
-          recordingState
-            ? {
-                backgroundColor: "#F47474",
-              }
-            : {}
-        }
-      >
-        {!recordingState ? "Record" : "Stop recording"}
-      </Button>
+      {omitRecord || (
+        <Button
+          onClick={fetchPictures}
+          style={
+            recordingState
+              ? {
+                  backgroundColor: "#F47474",
+                }
+              : {}
+          }
+        >
+          {!recordingState ? "Record" : "Stop recording"}
+        </Button>
+      )}
       <Button>Play</Button>
       <Button>Clear</Button>
     </Wrapper>

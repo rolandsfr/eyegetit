@@ -7,7 +7,6 @@ import ImageContainer from "../components/ImageContainer/ImageContainer";
 import Input from "../components/Input/Input";
 
 import ControlPanel from "../components/ControlPanel/ControlPanel";
-import Header from "../components/Header/Header";
 
 import { useEffect } from "react";
 import { useAppSelector } from "../hooks/useAppSelector";
@@ -40,7 +39,6 @@ const Listening = () => {
 
   return (
     <StyledWrapper>
-      <Header />
       <Container>
         <CardRow />
         <Input />

@@ -2,9 +2,11 @@ import styled from "styled-components";
 import Container from "../../styled/Container";
 import { setLocation } from "../../redux/slices/navSlice";
 import { useAppSelector } from "@/app/hooks/useAppSelector";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Toggle from "react-toggle";
 import "react-toggle/style.css"; // for ES6 modules
+import { useAppDispatch } from "@/app/hooks/useAppDispatch";
+import { useRouter } from "next/navigation";
 
 const Wrapper = styled.header`
   position: fixed;
@@ -31,10 +33,20 @@ const Wrapper = styled.header`
 const Header: React.FC = () => {
   const { mode } = useAppSelector((state) => state.navigation);
   const [modeSwitched, setModeSwitched] = useState(false);
+  const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const handleSwitchChange = () => {
     setModeSwitched(!modeSwitched);
   };
+
+  useEffect(() => {
+    // use nav slice to set location
+    dispatch(
+      setLocation({ location: modeSwitched ? "speaking" : "listening" })
+    );
+    router.push(modeSwitched ? "/speaking" : "/listening");
+  }, [modeSwitched]);
 
   return (
     <Wrapper>

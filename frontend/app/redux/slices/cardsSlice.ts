@@ -15,12 +15,12 @@ export const cardsSlice = createSlice({
   reducers: {
     setCards: (
       state,
-      payload: PayloadAction<{ word: string; image: string }[]>
+      action: PayloadAction<{ word: string; image: string }[]>
     ) => {
-      console.log(payload.payload);
+      console.log(action.payload);
       return {
         ...state,
-        cards: payload.payload,
+        cards: action.payload,
       };
     },
   },
