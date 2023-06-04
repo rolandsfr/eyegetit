@@ -36,8 +36,7 @@ const ControlPanel: React.FC<ControlPanelProps> = ({ onTranscriptChange, resolve
   const [recordingState, setRecordingState] = useState(false);
   const [playingText, setPlayingText] = useState("");
 
-  const voices = window.speechSynthesis.getVoices();
-  const selectedVoice = voices.find((voice) => voice.name == 'Google US English') || voices[0];
+
 
   const {
     transcript,
@@ -103,6 +102,13 @@ const ControlPanel: React.FC<ControlPanelProps> = ({ onTranscriptChange, resolve
       return;
     }
 
+    if (window === undefined || window.speechSynthesis === undefined) {
+      return;
+    }
+
+    const voices = window.speechSynthesis.getVoices();
+    const selectedVoice = voices.find((voice) => voice.name == 'Google US English') || voices[0];
+
     let utterance = new SpeechSynthesisUtterance(playingText);
 
     utterance.voice = selectedVoice;
@@ -110,7 +116,7 @@ const ControlPanel: React.FC<ControlPanelProps> = ({ onTranscriptChange, resolve
     window.speechSynthesis.speak(utterance);
 
     setPlayingText("");
-  }, [selectedVoice, playingText]);
+  }, [playingText]);
 
   return (
     <Wrapper className="panel">
