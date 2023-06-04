@@ -24,7 +24,7 @@ const Wrapper = styled.div`
 `;
 
 interface ControlPanelProps {
-  onTranscriptChange: (transcript: string) => void;
+  onTranscriptChange?: (transcript: string) => void;
   omitRecord?: boolean;
 }
 
