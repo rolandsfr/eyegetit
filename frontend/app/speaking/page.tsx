@@ -142,6 +142,7 @@ const Speaking = () => {
                       !props.url ? props.url : props.url.replace(/\s/g, "%20")
                     }
                     key={index}
+                    onSelect={(card) => addCard(card)}
                   />
                 );
               })}
@@ -156,7 +157,7 @@ const Speaking = () => {
                       url={
                         !props.url ? props.url : props.url.replace(/\s/g, "%20")
                       }
-                    />
+                      />
                   </div>
                 );
               })}
