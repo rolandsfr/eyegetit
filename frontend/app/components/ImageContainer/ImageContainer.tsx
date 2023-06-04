@@ -80,7 +80,7 @@ const ImageContainer: React.FC<ImageContainerProps> = ({
           backgroundImage: `url(${url})`,
         }}
       >
-        {url === "" ? (
+        {!url && word ? (
           <div className="no-pic">
             <h3>Image is missing</h3>
             <p>Press to create an image</p>

@@ -11,9 +11,14 @@ const Wrapper = styled.div`
   padding-top: 5.5em;
 `;
 
-export interface CardInterface {
+export interface CardInterface extends CardPlaceholder {
   url: string | null;
   word: string;
+}
+
+export interface CardPlaceholder {
+  url: string | null;
+  word: string | null;
 }
 
 interface CardRowProps {
@@ -21,25 +26,30 @@ interface CardRowProps {
   onCardSelect?: (card: CardInterface) => void;
 }
 
+const InitialPlaceholder: CardPlaceholder = {
+  word: null,
+  url: null,
+};
+
+const EmptyRow = [InitialPlaceholder, InitialPlaceholder, InitialPlaceholder, InitialPlaceholder]
+
 const CardRow: React.FC<CardRowProps> = ({ cards, onCardSelect }) => {
-  const [cardComponents, setCardsComponents] = useState<any>([{}, {}, {}, {}]);
+  const [cardComponents, setCardsComponents] = useState<CardPlaceholder[]>(EmptyRow);
 
   useEffect(() => {
-    const rowsToAppend =
+    const placeholdersToAppend =
       cardComponents.length < cards.length
-        ? Math.ceil(cards.length / 4) - 1
+        ? Math.ceil(cards.length / EmptyRow.length) * EmptyRow.length - cards.length
         : 0;
 
     cards.forEach((card, index) => {
       cardComponents[index] = card;
     });
 
-    const emptyObjects = [];
+    const emptyObjects: CardPlaceholder[] = [];
 
-    if (rowsToAppend > 0) {
-      for (let i = 0; i < rowsToAppend * 4; i++) {
-        emptyObjects.push({});
-      }
+    for (let i = 0; i < placeholdersToAppend; i++) {
+      emptyObjects.push(InitialPlaceholder);
     }
 
     setCardsComponents([...cardComponents, ...emptyObjects]);
