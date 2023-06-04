@@ -37,16 +37,20 @@ const StyledWrapper = styled.main`
 
 const Listening = () => {
   const { cards } = useAppSelector((state) => state.cards);
-  const [transcript, setTranscript] = useState("");
-  const [value, setValue] = useState("");
+  const [transcript, setTranscript] = useState<string | undefined>();
+  const [inputText, setInputText] = useState("");
 
   return (
     <StyledWrapper>
       <Header />
       <Container>
         <CardRow />
-        <Input value={transcript || value} onValueChanged={(value) => setValue(value)} />
-        <ControlPanel onTranscriptChange={(value) => setTranscript(value)} resolveTextToPlay={() => value} />
+        <Input definedValue={transcript} onValueChanged={(value) => setInputText(value)} />
+        <ControlPanel
+          onTranscriptChange={(value) => setTranscript(value)}
+          resolveTextToPlay={() => inputText}
+          onClear={() => { setInputText(""); }}
+        />
       </Container>
     </StyledWrapper>
   );

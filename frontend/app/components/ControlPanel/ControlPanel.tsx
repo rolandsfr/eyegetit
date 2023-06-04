@@ -26,14 +26,15 @@ const Wrapper = styled.div`
 interface ControlPanelProps {
   onTranscriptChange?: (transcript: string) => void;
   resolveTextToPlay?: () => string;
+  onClear?: () => void;
   omitRecord?: boolean;
 }
 
-const ControlPanel: React.FC<ControlPanelProps> = ({ onTranscriptChange, resolveTextToPlay, omitRecord }) => {
+const ControlPanel: React.FC<ControlPanelProps> = ({ onTranscriptChange, resolveTextToPlay, onClear, omitRecord }) => {
   const [recordingState, setRecordingState] = useState(false);
   const [playingText, setPlayingText] = useState("");
 
-  const voices = window.speechSynthesis.getVoices();
+  const voices = speechSynthesis.getVoices();
   const selectedVoice = voices.find((voice) => voice.name == 'Google US English') || voices[0];
 
   const {
@@ -88,7 +89,7 @@ const ControlPanel: React.FC<ControlPanelProps> = ({ onTranscriptChange, resolve
   };
 
   useEffect(() => {
-    if (!onTranscriptChange) {
+    if (!onTranscriptChange || !transcript) {
       return;
     }
 
@@ -100,12 +101,14 @@ const ControlPanel: React.FC<ControlPanelProps> = ({ onTranscriptChange, resolve
       return;
     }
 
-    let utterance = new SpeechSynthesisUtterance("Hello world!");
+    let utterance = new SpeechSynthesisUtterance(playingText);
 
     utterance.voice = selectedVoice;
 
     speechSynthesis.speak(utterance);
-  }, [playingText]);
+
+    setPlayingText("");
+  }, [selectedVoice, playingText]);
 
   return (
     <Wrapper className="panel">
@@ -123,14 +126,8 @@ const ControlPanel: React.FC<ControlPanelProps> = ({ onTranscriptChange, resolve
           {!recordingState ? "Record" : "Stop recording"}
         </Button>
       )}
-      <Button onClick={() => playVoice()} style={
-            playingText !== ""
-              ? {
-                  backgroundColor: "#F47474",
-                }
-              : {}
-          }>Play</Button>
-      <Button onClick={() => resetTranscript()}>Clear</Button>
+      <Button onClick={() => playVoice()}>Play</Button>
+      <Button onClick={() => { onClear ? onClear() : {}; resetTranscript() }}>Clear</Button>
     </Wrapper>
   );
 };
