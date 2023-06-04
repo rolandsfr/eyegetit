@@ -32,12 +32,20 @@ const PanelButton: React.FC<{ option: CardSelectionOptions; name: string }> = ({
   );
 };
 
-const cardSelectionOptions: React.FC = () => {
+const cardSelectionOptions: React.FC<{
+  categorySetter: React.Dispatch<React.SetStateAction<string | null>>;
+}> = ({ categorySetter }) => {
   return (
     <Wrapper>
-      <PanelButton name="Recommended" option="recommended" />
-      <PanelButton name="Categories" option="categories" />
-      <PanelButton name="Add new image" option="generate" />
+      <div style={{ width: "100%" }} onClick={() => categorySetter(null)}>
+        <PanelButton name="Recommended" option="recommended" />
+      </div>
+      <div style={{ width: "100%" }}>
+        <PanelButton name="Categories" option="categories" />
+      </div>
+      <div style={{ width: "100%" }} onClick={() => categorySetter(null)}>
+        <PanelButton name="Add new image" option="generate" />
+      </div>
     </Wrapper>
   );
 };
