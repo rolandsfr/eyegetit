@@ -30,7 +30,7 @@ All responses should be in JSON in the following format:
             }, {
                 role: "assistant",
                 content: "I'm happy to help! Please provide me with the sentence you'd like me to convert to an array of PECS cards."
-            }, {role: "user", content: `${message}. Respond only in plain JSON.`}
+            }, {role: "user", content: `"${message}". Respond only in valid JSON. Do not add any additional text.`}
             ]
         }, {
             headers: {
@@ -39,7 +39,11 @@ All responses should be in JSON in the following format:
         });
         const {choices} = response.data;
         const reply = choices[0].message.content;
-        return JSON.parse(reply);
+        try {
+            JSON.parse(reply);
+        } catch (e) {
+            console.error('Error while parsing response from ChatGPT', e)
+        }
     } catch (error) {
         console.error('Error while handling response from ChatGPT', error)
         throw error;
