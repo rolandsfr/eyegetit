@@ -13,7 +13,7 @@ import ControlPanel from "../components/ControlPanel/ControlPanel";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../hooks/useAppSelector";
 
-import CardRow from "../components/CardRow/CardRow";
+import CardRow, { CardInterface } from "../components/CardRow/CardRow";
 import axios from "axios";
 import SelectionUnit from "../components/SelectionUnit/SelectionUnit";
 import { setCardSelectionMode } from "../redux/slices/navSlice";
@@ -57,14 +57,10 @@ const StyledWrapper = styled.main`
   }
 `;
 
-interface CardInterface {
-  url: string;
-  name: string;
-}
-
 const Speaking = () => {
   const { cardSelection } = useAppSelector((state) => state.navigation);
   const [words, setWords] = useState<CardInterface[]>([]);
+  const [selectedCards, setSelectedCards] = useState<CardInterface[]>([]);
   const [category, setCategory] = useState<string | null>(null);
 
   useEffect(() => {
@@ -73,8 +69,16 @@ const Speaking = () => {
         const res = await axios.get<{ words: CardInterface[] }>(
           `${process.env.NEXT_PUBLIC_HOST}/cards/list`
         );
-        const words = res.data.words.slice(0, 30);
-        setWords(words);
+
+        if (res.data.words) {
+          const words = res.data.words.slice(0, 30);
+          setWords(words);
+        } else {
+          setWords([{
+            url: "https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187.jpg?w=1272&h=848",
+            word: "cat",
+          }])
+        }
       })();
     } else if (cardSelection == "categories") {
       (async () => {
@@ -92,7 +96,7 @@ const Speaking = () => {
             const url = res.data.words[0].url;
 
             return {
-              name: cat.category,
+              word: cat.category,
               url,
             };
           })
@@ -118,10 +122,14 @@ const Speaking = () => {
     }
   }, [category]);
 
+  const addCard = (card: CardInterface) => {
+    setSelectedCards([...selectedCards, card]);
+  };
+
   return (
     <StyledWrapper>
       <Container>
-        <CardRow />
+        <CardRow cards={selectedCards} />
         <ControlPanel omitRecord={true} />
         <CardSelectionOptions categorySetter={setCategory} />
         {cardSelection == "categories" ? (
@@ -130,8 +138,8 @@ const Speaking = () => {
               {words.map((props, index) => {
                 return (
                   <SelectionUnit
-                    name={props.name}
-                    url={props.url.replace(/\s/g, "%20")}
+                    word={props.word}
+                    url={!props.url ? props.url : props.url.replace(/\s/g, "%20")}
                     key={index}
                   />
                 );
@@ -141,10 +149,10 @@ const Speaking = () => {
             <div className="categories">
               {words.map((props, index) => {
                 return (
-                  <div onClick={() => setCategory(props.name)} key={index}>
+                  <div onClick={() => setCategory(props.word)} key={index}>
                     <SelectionUnit
-                      name={props.name}
-                      url={props.url.replace(/\s/g, "%20")}
+                      word={props.word}
+                      url={!props.url ? props.url : props.url.replace(/\s/g, "%20")}
                     />
                   </div>
                 );
@@ -159,9 +167,10 @@ const Speaking = () => {
             {words.map((props, index) => {
               return (
                 <SelectionUnit
-                  name={props.name}
-                  url={props.url.replace(/\s/g, "%20")}
+                  word={props.word}
+                  url={!props.url ? props.url : props.url.replace(/\s/g, "%20")}
                   key={index}
+                  onSelect={(card) => addCard(card)}
                 />
               );
             })}

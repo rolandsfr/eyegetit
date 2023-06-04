@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import navReducer from "./slices/navSlice";
-import cardsReducer from "./slices/cardsSlice";
 import { composeWithDevTools } from "@reduxjs/toolkit/dist/devtoolsExtension";
+import cardsSlice from "./slices/cardsSlice";
 
 const store = configureStore({
   reducer: {
     navigation: navReducer,
-    cards: cardsReducer,
+    cards: cardsSlice,
   },
   devTools: true,
 });

@@ -7,7 +7,7 @@ import Toggle from "react-toggle";
 import "react-toggle/style.css"; // for ES6 modules
 import { useModal } from "../Modal/Modal";
 import { useAppDispatch } from "@/app/hooks/useAppDispatch";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const Wrapper = styled.header`
   position: fixed;
@@ -33,7 +33,9 @@ const Wrapper = styled.header`
 
 const Header: React.FC = () => {
   const { mode } = useAppSelector((state) => state.navigation);
-  const [modeSwitched, setModeSwitched] = useState(false);
+  const path = usePathname();
+
+  const [modeSwitched, setModeSwitched] = useState(path === "/speaking" ? true : false);
   const dispatch = useAppDispatch();
   const router = useRouter();
 

@@ -1,6 +1,6 @@
 import styled, { StyledComponent } from "styled-components";
 import { useEffect, useRef } from "react";
-import { useAppSelector } from "@/app/hooks/useAppSelector";
+import { CardInterface } from "../CardRow/CardRow";
 
 const Wrapper = styled.div`
   display: inline-flex;
@@ -29,11 +29,11 @@ const WordContainer = styled.div<{ word: string | null | undefined }>`
 `;
 
 const SelectionUnit: React.FC<{
-  url: string | null | undefined;
-  name: string | null | undefined;
-}> = ({ url, name }) => {
+  url: string | null;
+  word: string;
+  onSelect?: (card: CardInterface) => void;
+}> = ({ url, word, onSelect }) => {
   const container = useRef<HTMLDivElement>(null);
-  const { cards } = useAppSelector((state) => state.cards);
 
   return (
     <Wrapper>
@@ -44,8 +44,12 @@ const SelectionUnit: React.FC<{
           height: container.current?.clientWidth,
           backgroundImage: `url(${url})`,
         }}
+        onClick={() => onSelect ? onSelect({
+          url,
+          word,
+        }) : {}}
       ></ImageWrapper>
-      <WordContainer word={name}>{name}</WordContainer>
+      <WordContainer word={word}>{word}</WordContainer>
     </Wrapper>
   );
 };
