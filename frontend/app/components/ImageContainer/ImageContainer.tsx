@@ -1,6 +1,7 @@
 import styled, { StyledComponent } from "styled-components";
 import { useEffect, useRef } from "react";
 import { useAppSelector } from "@/app/hooks/useAppSelector";
+import type { CardInterface } from "@/app/components/CardRow/CardRow";
 
 const Wrapper = styled.div`
   display: flex;
@@ -57,16 +58,17 @@ const WordContainer = styled.div<{ word: string | null | undefined }>`
   min-height: 10px;
 `;
 
-const ImageContainer: React.FC<{
-  url: string | null | undefined;
-  name: string | null | undefined;
-}> = ({ url, name }) => {
+interface ImageContainerProps extends CardInterface {
+  onClick?: (card: CardInterface) => void;
+}
+
+const ImageContainer: React.FC<ImageContainerProps> = ({ url, word, onClick }) => {
   const container = useRef<HTMLDivElement>(null);
-  const { cards } = useAppSelector((state) => state.cards);
 
   return (
     <Wrapper>
       <ImageWrapper
+        onClick={() => onClick ? onClick({ url, word }) : {}}
         ref={container}
         state={url}
         style={{
@@ -74,14 +76,14 @@ const ImageContainer: React.FC<{
           backgroundImage: `url(${url})`,
         }}
       >
-        {cards.length && url === "" ? (
+        {!url ? (
           <div className="no-pic">
             <h3>Image is missing</h3>
             <p>Press to create an image</p>
           </div>
         ) : null}
       </ImageWrapper>
-      <WordContainer word={name}>{name}</WordContainer>
+      <WordContainer word={word}>{word}</WordContainer>
     </Wrapper>
   );
 };

@@ -1,6 +1,5 @@
 import ImageContainer from "../ImageContainer/ImageContainer";
 import styled from "styled-components";
-import { useAppSelector } from "@/app/hooks/useAppSelector";
 import { useEffect, useState } from "react";
 
 const Wrapper = styled.div`
@@ -12,14 +11,18 @@ const Wrapper = styled.div`
   padding-top: 5.5em;
 `;
 
-const CardRow: React.FC = () => {
-  const { cards } = useAppSelector((state) => state.cards);
-  const [cardComponents, setCardsComponents] = useState<any>([{}, {}, {}, {}]);
+export interface CardInterface {
+  url: string | null;
+  word: string;
+}
 
-  let initialState = {
-    name: null,
-    url: null,
-  };
+interface CardRowProps {
+  cards: CardInterface[];
+  onCardSelect?: (card: CardInterface) => void;
+}
+
+const CardRow: React.FC<CardRowProps> = ({ cards, onCardSelect }) => {
+  const [cardComponents, setCardsComponents] = useState<any>([{}, {}, {}, {}]);
 
   useEffect(() => {
     const rowsToAppend =
@@ -27,13 +30,19 @@ const CardRow: React.FC = () => {
         ? Math.ceil(cards.length / 4) - 1
         : 0;
 
+    cards.forEach((card, index) => {
+      cardComponents[index] = card;
+    });
+
+    const emptyObjects = [];
+
     if (rowsToAppend > 0) {
-      const emptyObjects = [];
       for (let i = 0; i < rowsToAppend * 4; i++) {
         emptyObjects.push({});
       }
-      setCardsComponents([...cardComponents, ...emptyObjects]);
     }
+
+    setCardsComponents([...cardComponents, ...emptyObjects]);
   }, [cards]);
 
   return (
@@ -42,8 +51,9 @@ const CardRow: React.FC = () => {
         return (
           <ImageContainer
             key={index}
-            name={cards[index]?.word}
-            url={cards[index]?.image}
+            word={card?.word}
+            url={card?.url}
+            onClick={(card) => onCardSelect ? onCardSelect(card) : {}}
           />
         );
       })}
