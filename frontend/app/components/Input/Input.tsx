@@ -19,7 +19,7 @@ const Wrapper = styled.div`
     position: absolute;
     bottom: 0;
     right: 0;
-    background: #e1e1e1;
+    background-color: #00009e;
     border-radius: 10px;
     border: none;
     outline: none;
@@ -27,6 +27,12 @@ const Wrapper = styled.div`
     padding: 0.5em 1.5em 0.5em 1.5em;
     right: 1em;
     bottom: 1em;
+    transition: 0.4s all;
+    color: #fff;
+
+    &:hover {
+      background-color: #0000ed;
+    }
   }
 `;
 
@@ -75,7 +81,9 @@ const Input: React.FC<InputProps> = ({ definedValue, onValueChanged }) => {
       ></Textarea>
       <button
         className="submit"
-        onClick={valueToSubmit ? () => dispatch(setQuery(valueToSubmit)) : () => {}}
+        onClick={
+          valueToSubmit ? () => dispatch(setQuery(valueToSubmit)) : () => {}
+        }
       >
         Submit
       </button>

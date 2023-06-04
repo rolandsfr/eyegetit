@@ -4,6 +4,7 @@ import { useAppDispatch } from "@/app/hooks/useAppDispatch";
 import { setCardSelectionMode } from "@/app/redux/slices/navSlice";
 import { CardSelectionOptions } from "@/app/types";
 import { useAppSelector } from "@/app/hooks/useAppSelector";
+import { usePathname } from "next/navigation";
 
 const Wrapper = styled.div`
   display: flex;
@@ -23,11 +24,18 @@ const Wrapper = styled.div`
 
   button {
     color: #fff;
+    transition: 0.4s all;
   }
 
   button.disabled {
     background-color: #ebebeb;
     color: #989898;
+  }
+
+  .speaking-btn {
+    &:hover {
+      background-color: #00b955;
+    }
   }
 `;
 
@@ -35,6 +43,7 @@ const PanelButton: React.FC<{ option: CardSelectionOptions; name: string }> = ({
   option,
   name,
 }) => {
+  const pathname = usePathname();
   const dispatch = useAppDispatch();
   const { cardSelection } = useAppSelector((state) => state.navigation);
 
@@ -44,6 +53,7 @@ const PanelButton: React.FC<{ option: CardSelectionOptions; name: string }> = ({
         backgroundColor: cardSelection === option ? "#009846" : "#00B955",
       }}
       onClick={() => dispatch(setCardSelectionMode(option))}
+      className={pathname == "speaking" ? "speaking-btn" : ""}
     >
       {name}
     </Button>
