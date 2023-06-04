@@ -7,6 +7,7 @@ import ImageContainer from "../components/ImageContainer/ImageContainer";
 import Input from "../components/Input/Input";
 
 import ControlPanel from "../components/ControlPanel/ControlPanel";
+import Header from "../components/Header/Header";
 
 import { useState } from "react";
 import { useAppSelector } from "../hooks/useAppSelector";
@@ -37,13 +38,15 @@ const StyledWrapper = styled.main`
 const Listening = () => {
   const { cards } = useAppSelector((state) => state.cards);
   const [transcript, setTranscript] = useState("");
+  const [value, setValue] = useState("");
 
   return (
     <StyledWrapper>
+      <Header />
       <Container>
         <CardRow />
-        <Input value={transcript} />
-        <ControlPanel onTranscriptChange={setTranscript} />
+        <Input value={transcript || value} onValueChanged={(value) => setValue(value)} />
+        <ControlPanel onTranscriptChange={(value) => setTranscript(value)} resolveTextToPlay={() => value} />
       </Container>
     </StyledWrapper>
   );
